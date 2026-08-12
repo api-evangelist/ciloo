@@ -1,0 +1,42 @@
+generated: '2026-08-12'
+method: searched
+source: https://api.cilooprint.com/ciloo-cart-api-documentation/
+versioning:
+  scheme: uri-path-namespace
+  current: ciloo/v1
+  docs: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  document_version: 2.0.0
+  document_last_updated: '2025-08-18'
+  note: >-
+    The Cart API reference carries "Version 2.0.0 | Last updated: August 18, 2025" in its footer while
+    the REST namespace itself is still v1. The Printer API integration page was last modified
+    2026-01-20 (WordPress `modified` field on the published page) and carries no version.
+  companion_docs:
+  - url: https://api.cilooprint.com/printer-api-integration/
+    modified: '2026-01-20'
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation policy, no Sunset/Deprecation header support and no version-retirement schedule is published.
+sla:
+  url: null
+  uptime_target: null
+  note: No SLA or uptime commitment is published on the public surface.
+status_page: null
+status_page_note: >-
+  No status page found. status.ciloo.com and status.cilooprint.com do not resolve, and no status link
+  appears on ciloo.com, api.cilooprint.com or the support site.
+support:
+  email: support@ciloo.com
+  help_center: https://support.ciloo.com/hc/en-us
+  help_center_note: >-
+    Zendesk-hosted help centre; returned HTTP 403 with a Cloudflare managed bot challenge to an
+    automated fetch, so its contents were not read.
+deprecated_operations: []
+x-evidence:
+- url: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  http_status: 200
+- url: https://api.cilooprint.com/printer-api-integration/
+  http_status: 200
+- url: https://support.ciloo.com/hc/en-us
+  http_status: 403

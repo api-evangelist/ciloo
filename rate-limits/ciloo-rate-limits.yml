@@ -1,0 +1,16 @@
+generated: '2026-08-12'
+method: searched
+source: https://api.cilooprint.com/ciloo-cart-api-documentation/
+limit_count: 0
+limits: []
+headers: []
+note: >-
+  Ciloo publishes no rate limits and no rate-limit response headers. The only mention of throttling in
+  the entire reference is in its security guidance, where integrators are told to "implement client-side
+  throttling" — which implies there is no server-side signal to read. No X-RateLimit-*, RateLimit-* or
+  Retry-After header is documented, and no 429 response appears anywhere in the reference. An agent
+  calling this API has no runtime backpressure signal to act on. Recorded as an honest zero.
+status_on_exhaustion: undocumented
+evidence:
+- {url: 'https://api.cilooprint.com/ciloo-cart-api-documentation/', status: 200}
+- {url: 'https://api.cilooprint.com/printer-api-integration/', status: 200}

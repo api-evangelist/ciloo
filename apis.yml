@@ -1,19 +1,90 @@
 aid: ciloo
 name: Ciloo
-description: Ciloo is a company surfaced via the API Evangelist marketing integration graph — named as
-  an integration by 2 members of the programmable-marketing cohort — and added to the network as a stub
-  for full-pipeline profiling.
+description: >-
+  Ciloo is a Rotterdam-headquartered global platform for branded products and promotional merchandise.
+  Enterprises run a branded Ciloo store — business cards, apparel, stationery, signage, corporate gifts
+  and sales collateral — and every order placed in it is produced on demand by a vetted production
+  partner near the recipient, which Ciloo positions as cutting cost, waste and shipping distance while
+  keeping brand control central. The platform is used by manufacturing, medical-device, professional-
+  services and franchise organisations, and integrates with digital asset management (Frontify, Bynder,
+  Canto, Aprimo, Papirfly, Brandfolder, Marvia), procurement and ERP (SAP Ariba, S/4HANA, Proactis,
+  Proqura, Exact), SSO, and WooCommerce. Ciloo documents two APIs on its own knowledge centre at
+  api.cilooprint.com: a per-brand-store Cart API secured with OAuth 1.0a, and a bidirectional Printer
+  API integration that pushes orders to production partners and receives production and shipping status
+  callbacks in return.
+image: https://ciloo.com/wp-content/uploads/2022/01/Ciloo-Logo-2021.png
 url: https://raw.githubusercontent.com/api-evangelist/ciloo/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:marketing-integration-graph
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
-apis: []
+- Printing
+- Branded Merchandise
+- Promotional Products
+- Print On Demand
+- eCommerce
+- Digital Asset Management
+- Procurement
+- Fulfillment
+- Marketing
+apis:
+- aid: ciloo:ciloo-cart-api
+  name: Ciloo Cart API
+  description: >-
+    OAuth 1.0a (HMAC-SHA1) REST API on the ciloo/v1 namespace of a Ciloo brand store. Read, add, update
+    and remove cart items; mint per-customer OAuth credentials from admin credentials; and issue
+    one-hour auto-login tokens that drop a customer straight into the store's cart or order history.
+    Customer records are created and updated through the WooCommerce wc/v3 namespace on the same host.
+    Requests are form-encoded — the provider documents that a JSON content type breaks the signature.
+  humanURL: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  baseURL: https://{store_domain}/wp-json/ciloo/v1
+  tags:
+  - Cart
+  - Customers
+  - Authentication
+  - Print On Demand
+  properties:
+  - type: Documentation
+    url: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  - type: APIReference
+    url: https://api.cilooprint.com/ciloo-cart-api-documentation/#api-endpoints-reference
+  - type: GettingStarted
+    url: https://api.cilooprint.com/ciloo-cart-api-documentation/#authentication-setup
+  - type: OpenAPI
+    url: openapi/ciloo-cart-api-openapi.yml
+  - type: Overlay
+    url: overlays/ciloo-cart-api-overlay.yaml
+  - type: Postman
+    url: collections/ciloo-cart-api.postman_collection.json
+  - type: Authentication
+    url: authentication/ciloo-authentication.yml
+  - type: ErrorCatalog
+    url: errors/ciloo-problem-types.yml
+  - type: DataModel
+    url: data-model/ciloo-data-model.yml
+- aid: ciloo:ciloo-printer-api
+  name: Ciloo Printer API Integration
+  description: >-
+    Bidirectional order integration between Ciloo and its production partners. Ciloo POSTs a print order
+    — items, print components with artwork paths and substrate attributes, and shipments with carrier
+    and destination — to the partner's own order endpoint; the partner POSTs production-status and
+    shipping callbacks, with tracking, back to a Ciloo-owned inbound callback URL. Authentication is
+    agreed per partner rather than published.
+  humanURL: https://api.cilooprint.com/printer-api-integration/
+  baseURL: https://dashboard.cilooprint.com/ciloo-order-callback/printer-inbound
+  tags:
+  - Orders
+  - Webhooks
+  - Fulfillment
+  - Printing
+  properties:
+  - type: Documentation
+    url: https://api.cilooprint.com/printer-api-integration/
+  - type: Webhooks
+    url: asyncapi/ciloo-printer-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -22,7 +93,64 @@ maintainers:
 common:
 - type: Website
   url: https://ciloo.com/
+- type: DeveloperPortal
+  url: https://api.cilooprint.com/
+- type: Documentation
+  url: https://api.cilooprint.com/
+- type: APIReference
+  url: https://api.cilooprint.com/ciloo-cart-api-documentation/#api-endpoints-reference
+- type: GettingStarted
+  url: https://api.cilooprint.com/ciloo-cart-api-documentation/#authentication-setup
+- type: Support
+  url: https://support.ciloo.com/hc/en-us
+- type: Blog
+  url: https://ciloo.com/blog/
+- type: BlogRSS
+  url: https://ciloo.com/feed/
+- type: TermsOfService
+  url: https://ciloo.com/terms-conditions/
+- type: PrivacyPolicy
+  url: https://ciloo.com/privacy-policy/
+- type: Contact
+  url: https://ciloo.com/contact/
+- type: Integrations
+  url: https://ciloo.com/integrations-partners/
+- type: CaseStudies
+  url: https://ciloo.com/case-studies/
+- type: Postman
+  url: collections/ciloo-cart-api.postman_collection.json
+- type: Authentication
+  url: authentication/ciloo-authentication.yml
+- type: Conventions
+  url: conventions/ciloo-conventions.yml
+- type: ErrorCatalog
+  url: errors/ciloo-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/ciloo-lifecycle.yml
+- type: Conformance
+  url: conformance/ciloo-conformance.yml
+- type: DataModel
+  url: data-model/ciloo-data-model.yml
+- type: Webhooks
+  url: asyncapi/ciloo-printer-webhooks.yml
+- type: MCPServer
+  url: mcp/ciloo-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/ciloo-llms.txt
+- type: Plans
+  url: plans/ciloo-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/ciloo-rate-limits.yml
+- type: DomainSecurity
+  url: security/ciloo-domain-security.yml
 x-vouched-by:
 - Brandfolder
 - Frontify
 x-vouch-count: 2
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 20
+  pass: local-v1

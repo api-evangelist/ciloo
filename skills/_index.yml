@@ -1,0 +1,18 @@
+generated: '2026-08-12'
+method: generated
+source:
+- openapi/ciloo-cart-api-openapi.yml
+- asyncapi/ciloo-printer-webhooks.yml
+note: >-
+  Ciloo publishes no AGENTS.md or agent skills of its own. These two skills were generated from the
+  provider's own documented operations and callback payloads; every operationId referenced exists in
+  openapi/ciloo-cart-api-openapi.yml.
+skills:
+- file: ciloo-provision-customer-and-fill-cart.md
+  name: Provision a Ciloo customer and fill their cart
+  api: openapi/ciloo-cart-api-openapi.yml
+  operations: [createCustomer, generateCustomerKeys, addCartItem, getCartItems, generateLoginToken]
+- file: ciloo-printer-order-integration.md
+  name: Integrate a production partner with Ciloo order callbacks
+  api: asyncapi/ciloo-printer-webhooks.yml
+  operations: [order.create, order.status, order.shipped]

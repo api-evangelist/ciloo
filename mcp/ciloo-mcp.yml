@@ -1,0 +1,49 @@
+generated: '2026-08-12'
+method: derived
+status: candidate
+source: openapi/ciloo-cart-api-openapi.yml
+note: >-
+  Ciloo publishes no MCP server. No hosted or remote MCP endpoint was found on ciloo.com,
+  api.cilooprint.com, api.ciloo.com or dashboard.cilooprint.com, and no Ciloo server is listed on npm
+  under @modelcontextprotocol or in the public MCP registries. The tool list below is a CANDIDATE
+  derived one-for-one from the operations Ciloo documents in its Cart API reference — it is what an MCP
+  server over this API would expose, not something Ciloo runs. Each tool's real input schema is the
+  parameters/requestBody of its source operation in openapi/ciloo-cart-api-openapi.yml.
+server:
+  name: ciloo
+  transport: http
+  url: null
+searched:
+- {url: 'https://api.cilooprint.com/', result: no MCP endpoint documented, checked: '2026-08-12'}
+- {url: 'https://ciloo.com/integrations-partners/', result: no MCP or agent integration listed, checked: '2026-08-12'}
+tools:
+- name: get_cart_items
+  description: Retrieve all items currently in the customer's shopping cart.
+  source_operation: openapi/ciloo-cart-api-openapi.yml#getCartItems
+- name: add_cart_item
+  description: Add an item to the customer's cart with file, product and SKU metadata.
+  source_operation: openapi/ciloo-cart-api-openapi.yml#addCartItem
+- name: update_cart_item
+  description: Change the quantity of an existing cart item.
+  source_operation: openapi/ciloo-cart-api-openapi.yml#updateCartItem
+- name: remove_cart_item
+  description: Remove an item from the cart. Irreversible.
+  source_operation: openapi/ciloo-cart-api-openapi.yml#removeCartItem
+- name: generate_customer_keys
+  description: Mint per-customer OAuth 1.0a credentials using admin credentials.
+  source_operation: openapi/ciloo-cart-api-openapi.yml#generateCustomerKeys
+  consequence: credential-issuing — should require human approval in any agent deployment.
+- name: generate_login_token
+  description: Issue a one-hour auto-login token for the authenticated customer.
+  source_operation: openapi/ciloo-cart-api-openapi.yml#generateLoginToken
+  consequence: session-issuing — should require human approval in any agent deployment.
+- name: generate_customer_login_token
+  description: Look a customer up by email and issue an auto-login token (HTTP Basic auth).
+  source_operation: openapi/ciloo-cart-api-openapi.yml#generateCustomerLoginToken
+  consequence: session-issuing — should require human approval in any agent deployment.
+- name: create_customer
+  description: Create a customer account on the brand store.
+  source_operation: openapi/ciloo-cart-api-openapi.yml#createCustomer
+- name: update_customer
+  description: Update a customer's profile, billing or shipping details.
+  source_operation: openapi/ciloo-cart-api-openapi.yml#updateCustomer

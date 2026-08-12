@@ -1,0 +1,176 @@
+generated: '2026-08-12'
+method: searched
+source: https://api.cilooprint.com/printer-api-integration/
+spec_type: none
+note: >-
+  Ciloo publishes no AsyncAPI document. It does publish a real, bidirectional event surface — the Ciloo
+  Printer API Integration — in which Ciloo POSTs orders out to a production partner's own endpoint and
+  the partner POSTs production and shipping status callbacks back to a Ciloo-owned callback URL. This
+  file is the webhook/callback catalog transcribed from that published page; the payloads below are the
+  provider's own documented examples. Nothing here is inferred.
+surface:
+  name: Ciloo Printer API Integration
+  direction: bidirectional
+  docs: https://api.cilooprint.com/printer-api-integration/
+  authentication: >-
+    Printer-dependent. The provider states the validation method is agreed per production partner and
+    asks integrators to contact Ciloo to select one; no single scheme is published.
+  contact: support@ciloo.com
+webhooks:
+- name: order.create
+  direction: ciloo-to-partner
+  method: POST
+  endpoint: partner-owned
+  endpoint_example: https://yourprinter.com/api/orders/create
+  description: >-
+    Ciloo sends a new print order to the production partner's order-creation endpoint. The partner
+    replies with its own order id and timestamp.
+  payload_fields:
+  - orderData.sourceOrderId
+  - orderData.customerName
+  - orderData.items[].sourceItemId
+  - orderData.items[].quantity
+  - orderData.items[].productionSKU
+  - orderData.items[].productionCost
+  - orderData.items[].mockup_url
+  - orderData.items[].components[].code
+  - orderData.items[].components[].path
+  - orderData.items[].components[].attributes
+  - orderData.shipments[].shipTo
+  - orderData.shipments[].carrier.code
+  - orderData.shipments[].carrier.service
+  expected_response_fields:
+  - _id
+  - timestamp
+  example_request: |
+    {
+      "orderData": {
+        "sourceOrderId": "Ciloo-1054",
+        "customerName": "John Doe",
+        "items": [
+          {
+            "sourceItemId": "Ciloo-1054-139",
+            "quantity": 100,
+            "productionSKU": "sample_product_sku",
+            "productionCost": 0,
+            "mockup_url": "",
+            "components": [
+              {
+                "code": "text|cover",
+                "path": "https://www.example.com/sample-path/Orders/1054/1054_1.pdf",
+                "attributes": {
+                  "pageSize": "3.5x2",
+                  "substrate": "16-pt.-Tango",
+                  "ColorType": "Double",
+                  "orientation": "Landscape"
+                }
+              }
+            ]
+          }
+        ],
+        "shipments": [
+          {
+            "shipTo": {
+              "name": "John Doe",
+              "companyName": "ABC Company",
+              "address1": "13 MAin Street",
+              "address2": "Apt 709",
+              "town": "New York",
+              "postcode": "10011",
+              "state": "NY",
+              "isoCountry": "US",
+              "phone": "9900000000"
+            },
+            "carrier": {"code": "usps", "service": "USPS_GROUND_ADVANTAGE"}
+          }
+        ]
+      }
+    }
+- name: order.status
+  direction: partner-to-ciloo
+  method: POST
+  endpoint: ciloo-owned
+  endpoint_example: https://dashboard.cilooprint.com/ciloo-order-callback/printer-inbound
+  description: >-
+    Production progress callback. Sent for production milestones; no shipping information required. The
+    documentation asks each partner to supply its own list of supported OrderStatus values rather than
+    publishing a fixed enumeration.
+  payload_fields:
+  - TimeStamp
+  - OrderId
+  - SourceOrderId
+  - OrderStatus
+  example_request: |
+    {
+      "TimeStamp": "2025-02-17T11:28:16.205Z",
+      "OrderId": "6abz14474f2c932a485ec441",
+      "SourceOrderId": "Ciloo-1054",
+      "OrderStatus": "received"
+    }
+- name: order.shipped
+  direction: partner-to-ciloo
+  method: POST
+  endpoint: ciloo-owned
+  endpoint_example: https://dashboard.cilooprint.com/ciloo-order-callback/printer-inbound
+  description: >-
+    Fulfilment callback, sent when items are handed to the carrier and tracking becomes available.
+    Carries full tracking and shipping detail, with ShipmentIndex incrementing per shipment.
+  payload_fields:
+  - TimeStamp
+  - SourceOrderId
+  - OrderId
+  - ShipmentIndex
+  - TrackingNumber
+  - TrackingUrl
+  - OrderStatus
+  - CarrierMethod
+  - CarrierCode
+  - CarrierService
+  - sourceItemIds
+  - shipTo
+  example_request: |
+    {
+      "TimeStamp": "2025-02-17T06:03:14.891Z",
+      "SourceOrderId": "Ciloo-1054",
+      "OrderId": "6abz14474f2c932a485ec441",
+      "ShipmentIndex": 0,
+      "TrackingNumber": "00340434499817631628",
+      "TrackingUrl": "https://www.shipper.com/?trackcode=XXXXXXX",
+      "OrderStatus": "shipped",
+      "CarrierMethod": "tracked",
+      "CarrierCode": "custom",
+      "CarrierService": "default",
+      "sourceItemIds": ["Ciloo-1054-139", "Ciloo-1054-140"],
+      "shipTo": {
+        "name": "John Doe",
+        "companyName": "ABC Company",
+        "address1": "13 MAin Street",
+        "address2": "Apt 709",
+        "town": "New York",
+        "postcode": "10011",
+        "state": "NY",
+        "isoCountry": "US",
+        "country": "United States (US)",
+        "phone": "9900000000"
+      }
+    }
+- name: customer_keys.delivered
+  direction: ciloo-to-integrator
+  method: POST
+  endpoint: integrator-owned
+  description: >-
+    Not part of the Printer API, but the same callback pattern: generateCustomerKeys on the Cart API
+    POSTs the newly minted customer OAuth 1.0a credentials to the callback_url supplied on the request.
+  source: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  payload_fields:
+  - consumer_key
+  - consumer_secret
+gaps:
+- No AsyncAPI or other machine-readable event description is published.
+- No signature, HMAC or replay-protection scheme is published for the inbound callbacks.
+- No retry or delivery-guarantee policy is published.
+- OrderStatus values are negotiated per partner rather than enumerated.
+x-evidence:
+- url: https://api.cilooprint.com/printer-api-integration/
+  http_status: 200
+  fetched: '2026-08-12'

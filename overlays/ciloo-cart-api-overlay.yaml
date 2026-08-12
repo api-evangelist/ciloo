@@ -1,0 +1,60 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Ciloo Cart API
+  version: 1.0.0
+extends: openapi/ciloo-cart-api-openapi.yml
+x-provenance:
+  generated: '2026-08-12'
+  method: generated
+  source: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  note: >-
+    Captures the API Evangelist annotations layered over the generated Ciloo Cart API description, so the
+    description itself stays a faithful transcription of the provider's published reference.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: ciloo
+    x-apievangelist-contract-source: provider prose documentation + first-party Postman collection
+    x-apievangelist-spec-published-by-provider: false
+- target: $.info
+  update:
+    x-apievangelist-gaps:
+    - no provider-published OpenAPI
+    - no idempotency contract on any write operation
+    - no published rate limits and no rate-limit response headers
+    - bespoke error envelope rather than RFC 9457 problem+json
+    - OAuth 1.0a timestamp/nonce accepted without validation, removing replay protection
+    - no status page, SLA or deprecation policy
+- target: $.paths['/wp-json/ciloo/v1/generate_customer_keys'].post
+  update:
+    x-agentic-access:
+      action-class: acting
+      consequence: physical
+      human-in-the-loop: required
+      note: Issues long-lived customer credentials and posts them to a caller-supplied URL.
+- target: $.paths['/wp-json/ciloo/v1/login-token'].post
+  update:
+    x-agentic-access:
+      action-class: acting
+      consequence: physical
+      human-in-the-loop: required
+      note: Issues a one-hour bearer of a customer's store session.
+- target: $.paths['/wp-json/ciloo/v1/customer-login-token'].post
+  update:
+    x-agentic-access:
+      action-class: acting
+      consequence: physical
+      human-in-the-loop: required
+      note: Resolves a customer by email address and issues a session token for them.
+- target: $.paths['/wp-json/ciloo/v1/cart/items/{asset_id}'].delete
+  update:
+    x-agentic-access:
+      action-class: acting
+      consequence: write
+      human-in-the-loop: recommended
+      note: The provider documents removal as irreversible.
+- target: $.paths['/wp-json/ciloo/v1/cart'].get
+  update:
+    x-agentic-access:
+      action-class: connected
+      consequence: read

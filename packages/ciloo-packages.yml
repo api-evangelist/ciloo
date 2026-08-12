@@ -1,0 +1,51 @@
+generated: '2026-08-12'
+method: searched
+package_count: 0
+packages: []
+note: >-
+  No first-party Ciloo client library exists on any public registry. Ciloo ships copy-and-paste
+  reference implementations instead — a full PHP class, a JavaScript/Node class and a Python class are
+  printed inline in the Cart API documentation, along with a downloadable Postman collection — but none
+  of them is published as an installable package, and there is no Ciloo GitHub organization to publish
+  from. Because nothing was found, no Packages or SDKs pointer is emitted.
+registries_searched:
+- {registry: npm, query: ciloo, result: no first-party package, checked: '2026-08-12'}
+- {registry: pypi, query: ciloo, status: 404, checked: '2026-08-12'}
+- {registry: rubygems, query: ciloo, status: 404, checked: '2026-08-12'}
+- {registry: packagist, query: ciloo, result: no first-party package, checked: '2026-08-12'}
+- {registry: github, query: 'orgs ciloo / cilooprint / ciloo-print', status: 404, checked: '2026-08-12'}
+reference_implementations:
+- language: php
+  form: inline source in the documentation (class CilooCartAPI)
+  url: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  registry: null
+  version: null
+  published: null
+  official: true
+  installable: false
+- language: javascript
+  form: inline source in the documentation (class CilooCartAPI, module.exports)
+  url: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  registry: null
+  version: null
+  published: null
+  official: true
+  installable: false
+- language: python
+  form: inline source in the documentation (class CilooCartAPI, requests-based)
+  url: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  registry: null
+  version: null
+  published: null
+  official: true
+  installable: false
+- language: null
+  form: Postman collection (zip download)
+  url: https://api.cilooprint.com/wp-content/uploads/2025/09/Ciloo-Cart-API-Generic-Implemetation.postman_collection.json_.zip
+  registry: cdn
+  version: null
+  published: '2025-08-17'
+  published_note: mtime of the JSON inside the published zip; the file is unversioned and the URL is unpinned.
+  official: true
+  installable: false
+  file: collections/ciloo-cart-api.postman_collection.json

@@ -1,0 +1,81 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/ciloo-cart-api-openapi.yml
+also_derived_from: asyncapi/ciloo-printer-webhooks.yml
+note: >-
+  Entity graph derived from the schemas and id-reference fields in the generated OpenAPI plus the
+  documented printer callback payloads. Only entities Ciloo actually names are listed.
+entities:
+- name: Customer
+  domain: customers
+  id_field: id
+  namespace: wc/v3
+  description: A brand-store customer account. Its id is the input to customer OAuth key provisioning.
+  fields: [id, email, first_name, last_name, username, billing, shipping]
+- name: CartItem
+  domain: cart
+  id_field: asset_id
+  namespace: ciloo/v1
+  description: >-
+    One line in a customer's cart. Keyed by asset_id in responses; carries the print file (url,
+    filename, pages) alongside catalogue identity (productUid, item_sku, product_id).
+  fields: [asset_id, quantity, filename, productUid, pages, url, item_sku, product_id, added_at]
+- name: LoginToken
+  domain: authentication
+  id_field: token
+  namespace: ciloo/v1
+  description: Time-limited (3600s) auto-login token bound to a customer and an IP address.
+  fields: [token, expiry]
+- name: CustomerKeys
+  domain: authentication
+  id_field: consumer_key
+  namespace: ciloo/v1
+  description: Per-customer OAuth 1.0a consumer key/secret pair, delivered to a caller-supplied callback URL.
+  fields: [consumer_key, consumer_secret]
+- name: Order
+  domain: production
+  id_field: sourceOrderId
+  namespace: printer-callback
+  description: >-
+    A print order as sent to a production partner. Ciloo's identifier is sourceOrderId (e.g.
+    "Ciloo-1054"); the partner returns its own _id, echoed back on callbacks as OrderId.
+  fields: [sourceOrderId, customerName, items, shipments]
+- name: OrderItem
+  domain: production
+  id_field: sourceItemId
+  namespace: printer-callback
+  description: One produced item on an order, carrying production SKU, cost, mockup and print components.
+  fields: [sourceItemId, quantity, productionSKU, productionCost, mockup_url, components]
+- name: Component
+  domain: production
+  id_field: code
+  namespace: printer-callback
+  description: A print component (e.g. "text|cover") with its artwork path and substrate/colour attributes.
+  fields: [code, path, attributes]
+- name: Shipment
+  domain: fulfilment
+  id_field: ShipmentIndex
+  namespace: printer-callback
+  description: One shipment against an order, with destination address, carrier and tracking.
+  fields: [ShipmentIndex, shipTo, carrier, TrackingNumber, TrackingUrl, CarrierCode, CarrierService, CarrierMethod]
+- name: Address
+  domain: fulfilment
+  id_field: null
+  namespace: shared
+  description: Postal address, used as shipTo on shipments and as billing/shipping on a customer.
+  fields: [name, companyName, address1, address2, town, postcode, state, isoCountry, country, phone]
+relationships:
+- {from: Customer, to: CartItem, type: has_many, via: authenticated consumer_key}
+- {from: Customer, to: CustomerKeys, type: has_one, via: customer_id}
+- {from: Customer, to: LoginToken, type: has_many, via: authenticated consumer_key}
+- {from: CartItem, to: Order, type: becomes, via: item_sku / productionSKU}
+- {from: Order, to: OrderItem, type: has_many, via: 'items[]'}
+- {from: OrderItem, to: Component, type: has_many, via: 'components[]'}
+- {from: Order, to: Shipment, type: has_many, via: 'shipments[]'}
+- {from: Shipment, to: Address, type: has_one, via: shipTo}
+- {from: Shipment, to: OrderItem, type: has_many, via: 'sourceItemIds[]'}
+- {from: Customer, to: Address, type: has_many, via: billing / shipping}
+id_conventions:
+- {entity: Order, form: 'Ciloo-<n>', example: Ciloo-1054, note: Ciloo-side order identifier}
+- {entity: OrderItem, form: 'Ciloo-<order>-<item>', example: Ciloo-1054-139}
+- {entity: CustomerKeys, form: 'ck_/cs_ prefixed, ck_admin_/cs_admin_ for admin tier'}

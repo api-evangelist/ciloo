@@ -1,0 +1,568 @@
+openapi: 3.1.0
+info:
+  title: Ciloo Cart API
+  version: 2.0.0
+  summary: OAuth 1.0a secured REST API for Ciloo brand-store cart, auto-login and customer operations.
+  description: >-
+    The Ciloo Cart API is the custom REST namespace (`ciloo/v1`) exposed by every Ciloo Print brand store
+    for managing a customer's shopping cart, issuing time-limited auto-login tokens into the Ciloo Print
+    Platform, and provisioning per-customer OAuth 1.0a credentials. Customer records themselves are
+    created and updated through the WooCommerce REST API v3 (`wc/v3`) namespace that Ciloo documents
+    alongside the cart namespace. Every operation below is transcribed from the provider's own published
+    reference at https://api.cilooprint.com/ciloo-cart-api-documentation/ and its downloadable Postman
+    collection; no operation, parameter or response has been invented.
+  contact:
+    name: Ciloo Support
+    email: support@ciloo.com
+    url: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  x-provenance:
+    generated: '2026-08-12'
+    method: generated
+    source:
+    - https://api.cilooprint.com/ciloo-cart-api-documentation/
+    - collections/ciloo-cart-api.postman_collection.json
+    note: >-
+      Generated faithfully from the provider's published API reference and first-party Postman
+      collection. Ciloo publishes no OpenAPI of its own; every path, method, parameter and example here
+      is copied verbatim from those two provider-published sources.
+servers:
+- url: https://{store_domain}
+  description: >-
+    A Ciloo brand store. Each customer brand store is its own host — a Ciloo-hosted
+    <tenant>.cilooprint.com subdomain or a customer-owned domain (e.g. store.jacobs.com,
+    hempelstore.com) — and the API lives under /wp-json on that same host. The documentation writes
+    this as "https://your-domain.com/wp-json/ciloo/v1/".
+  variables:
+    store_domain:
+      default: shop.ciloo.com
+      description: The hostname of your Ciloo brand store.
+tags:
+- name: Cart
+  description: Cart item read/write operations on the ciloo/v1 namespace.
+- name: Authentication
+  description: OAuth key provisioning and auto-login token issuance.
+- name: Customers
+  description: Customer lifecycle via the WooCommerce REST API v3 namespace, as documented by Ciloo.
+paths:
+  /wp-json/ciloo/v1/cart:
+    get:
+      operationId: getCartItems
+      summary: Get cart items
+      description: Retrieve all items currently in the customer's shopping cart with detailed metadata.
+      tags:
+      - Cart
+      security:
+      - oauth1a: []
+      responses:
+        '200':
+          description: Cart contents for the authenticated customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartResponse'
+              examples:
+                documented:
+                  summary: Example from the Ciloo Cart API reference
+                  value:
+                    success: true
+                    cart_items:
+                      asset-business-card-001:
+                        quantity: 2
+                        filename: premium-business-card.pdf
+                        productUid: Business_Card_Premium_001
+                        pages: 1
+                        url: https://example.com/files/premium-business-card.pdf
+                        item_sku: BC-PREM-001
+                        product_id: 1234
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /wp-json/ciloo/v1/cart/add-item:
+    post:
+      operationId: addCartItem
+      summary: Add item to cart
+      description: Add a new item to the customer's cart with complete product metadata and file information.
+      tags:
+      - Cart
+      security:
+      - oauth1a: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [asset_id, quantity, filename, productUid, pages, url, item_sku]
+              properties:
+                asset_id:
+                  type: string
+                  description: Unique identifier for the cart item.
+                  examples: [business-card-001]
+                quantity:
+                  type: integer
+                  description: Number of items to add.
+                  examples: [2]
+                filename:
+                  type: string
+                  description: Original filename.
+                  examples: [business-card.pdf]
+                productUid:
+                  type: string
+                  description: Product identifier from your system.
+                  examples: [Business_Card_001]
+                pages:
+                  type: integer
+                  description: Number of pages in the file.
+                  examples: [1]
+                url:
+                  type: string
+                  format: uri
+                  description: Direct URL to the file.
+                  examples: [https://example.com/file.pdf]
+                item_sku:
+                  type: string
+                  description: SKU for the item/product.
+                  examples: [BC-PREM-001]
+      responses:
+        '200':
+          description: Item added to the cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wp-json/ciloo/v1/cart/items/{asset_id}:
+    parameters:
+    - name: asset_id
+      in: path
+      required: true
+      description: >-
+        The asset_id of the cart item. Note the provider documents that route parameters are included
+        in the OAuth 1.0a signature base string.
+      schema:
+        type: string
+      examples:
+        documented:
+          value: business-card-001
+    put:
+      operationId: updateCartItem
+      summary: Update cart item
+      description: Modify the quantity of an existing cart item.
+      tags:
+      - Cart
+      security:
+      - oauth1a: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [quantity]
+              properties:
+                quantity:
+                  type: integer
+                  description: The new quantity for the cart item.
+                  examples: [5]
+      responses:
+        '200':
+          description: Cart item updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: removeCartItem
+      summary: Remove cart item
+      description: Completely remove an item from the customer's cart. The provider documents this action as irreversible.
+      tags:
+      - Cart
+      security:
+      - oauth1a: []
+      responses:
+        '200':
+          description: Cart item removed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wp-json/ciloo/v1/generate_customer_keys:
+    post:
+      operationId: generateCustomerKeys
+      summary: Generate customer OAuth keys
+      description: >-
+        Use admin-level OAuth credentials to generate unique OAuth 1.0a keys for one customer. Generated
+        keys are POSTed to the supplied callback_url; set return_keys=1 to also return them in the
+        response.
+      tags:
+      - Authentication
+      security:
+      - oauth1a: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [customer_id, callback_url]
+              properties:
+                customer_id:
+                  type: integer
+                  description: Customer ID.
+                callback_url:
+                  type: string
+                  format: uri
+                  description: Your endpoint that will receive the generated keys via secure POST.
+                return_keys:
+                  type: integer
+                  description: Set to 1 to return keys in the response.
+                  enum: [0, 1]
+      responses:
+        '200':
+          description: Customer keys generated and dispatched to the callback URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wp-json/ciloo/v1/login-token:
+    post:
+      operationId: generateLoginToken
+      summary: Generate auto-login token
+      description: >-
+        Generate a secure, time-limited auto-login token for seamless customer authentication and cart
+        access. Tokens expire after 1 hour. The token is used as
+        {base_url}?action=autologin&token=...&path=/cart.
+      tags:
+      - Authentication
+      security:
+      - oauth1a: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [ip_address]
+              properties:
+                ip_address:
+                  type: string
+                  description: Customer's IP address, used for security validation.
+      responses:
+        '200':
+          description: Auto-login token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        description: Signed auto-login token (JWT form).
+                      expiry:
+                        type: integer
+                        description: Token lifetime in seconds.
+                        examples: [3600]
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wp-json/ciloo/v1/customer-login-token:
+    post:
+      operationId: generateCustomerLoginToken
+      summary: Generate customer login token (Basic auth)
+      description: >-
+        Look a customer up by email address and issue an auto-login token. The provider documents this as
+        the one endpoint that uses HTTP Basic authentication (consumer key/secret as username/password)
+        instead of OAuth 1.0a.
+      tags:
+      - Authentication
+      security:
+      - basicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [user_email, ip_address]
+              properties:
+                user_email:
+                  type: string
+                  format: email
+                  description: Customer's email address for user lookup.
+                ip_address:
+                  type: string
+                  description: Customer's IP address for security validation.
+      responses:
+        '200':
+          description: Auto-login token issued for the looked-up customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wp-json/wc/v3/customers:
+    post:
+      operationId: createCustomer
+      summary: Create customer
+      description: >-
+        Create a new customer account with optional billing and shipping information. This is the
+        WooCommerce REST API v3 namespace, documented by Ciloo as the customer half of the cart
+        integration flow.
+      tags:
+      - Customers
+      security:
+      - oauth1a: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerInput'
+            examples:
+              documented:
+                value:
+                  email: john.doe@example.com
+                  first_name: John
+                  last_name: Doe
+                  username: john_doe
+      responses:
+        '201':
+          description: Customer created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wp-json/wc/v3/customers/{customer_id}:
+    parameters:
+    - name: customer_id
+      in: path
+      required: true
+      description: The WooCommerce customer id returned by createCustomer.
+      schema:
+        type: integer
+    put:
+      operationId: updateCustomer
+      summary: Update customer
+      description: Update existing customer information including profile details, billing and shipping addresses.
+      tags:
+      - Customers
+      security:
+      - oauth1a: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerInput'
+            examples:
+              documented:
+                value:
+                  first_name: James
+                  last_name: Doe
+      responses:
+        '200':
+          description: Customer updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    oauth1a:
+      type: http
+      scheme: OAuth
+      description: >-
+        OAuth 1.0a with the HMAC-SHA1 signature method (RFC 5849 "OAuth" HTTP authentication scheme).
+        Required parameters: oauth_consumer_key, oauth_signature_method=HMAC-SHA1, oauth_timestamp,
+        oauth_nonce, oauth_version=1.0, oauth_signature. Content-Type must be
+        application/x-www-form-urlencoded — the provider documents that a JSON content type causes
+        signature failures. Body parameters are merged into the signature base string for POST and PUT
+        only; path parameters are included. The provider documents that timestamp and nonce values are
+        not validated by the current implementation.
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication using the consumer key as username and consumer secret as password.
+        Documented as used only by generateCustomerLoginToken.
+  responses:
+    BadRequest:
+      description: Request rejected. Returns the documented error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: >-
+        Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common
+        error (about 80% of reported integration problems).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            documented:
+              value:
+                success: false
+                error:
+                  code: OAUTH_SIGNATURE_INVALID
+                  message: OAuth signature validation failed
+                  details: The provided signature does not match the expected signature
+                  timestamp: '2025-08-16T10:30:00Z'
+                debug:
+                  request_id: req_1692096000_abc123
+                  endpoint: /wp-json/ciloo/v1/cart/add-item
+                  method: POST
+  schemas:
+    CartItem:
+      type: object
+      description: One item in a Ciloo brand-store cart, keyed in responses by its asset_id.
+      properties:
+        quantity:
+          type: integer
+        filename:
+          type: string
+        productUid:
+          type: string
+        pages:
+          type: integer
+        url:
+          type: string
+          format: uri
+        item_sku:
+          type: string
+        product_id:
+          type: integer
+        added_at:
+          type: string
+          format: date-time
+    CartResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        cart_items:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/CartItem'
+        meta:
+          type: object
+          properties:
+            total_items:
+              type: integer
+            last_updated:
+              type: string
+              format: date-time
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+    ErrorResponse:
+      type: object
+      description: >-
+        The documented Ciloo error envelope. Note this is a bespoke envelope, not RFC 9457 problem+json.
+      properties:
+        success:
+          type: boolean
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+        debug:
+          type: object
+          properties:
+            request_id:
+              type: string
+            endpoint:
+              type: string
+            method:
+              type: string
+    Address:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    CustomerInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        billing:
+          $ref: '#/components/schemas/Address'
+        shipping:
+          $ref: '#/components/schemas/Address'
+    Customer:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+            description: Customer id, used to generate customer OAuth keys.
+      - $ref: '#/components/schemas/CustomerInput'

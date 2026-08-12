@@ -1,0 +1,106 @@
+generated: '2026-08-12'
+method: searched
+source: https://api.cilooprint.com/ciloo-cart-api-documentation/
+derived_from:
+- openapi/ciloo-cart-api-openapi.yml
+- collections/ciloo-cart-api.postman_collection.json
+summary: >-
+  Cross-cutting request/response semantics for the Ciloo Cart API, transcribed from the provider's
+  published reference. Ciloo's API is a WordPress/WooCommerce REST namespace, and its conventions follow
+  from that: form-encoded bodies, OAuth 1.0a HMAC-SHA1 signatures, a bespoke success/error envelope, and
+  per-brand-store hostnames.
+authentication:
+  style: oauth1a-hmac-sha1
+  header: Authorization
+  scheme: OAuth
+  exception:
+    endpoint: /wp-json/ciloo/v1/customer-login-token
+    style: http-basic
+    note: Consumer key as username, consumer secret as password.
+  credential_tiers:
+  - name: admin
+    prefixes: [ck_admin_, cs_admin_]
+    use: Generating per-customer keys only; not intended for cart operations.
+  - name: customer
+    prefixes: [ck_, cs_]
+    use: All cart operations, scoped to one customer account.
+  provisioning: POST /wp-json/ciloo/v1/generate_customer_keys — keys are POSTed to a caller-supplied callback_url.
+  see: authentication/ciloo-authentication.yml
+content_types:
+  request: application/x-www-form-urlencoded
+  request_note: >-
+    Required for every OAuth-signed endpoint. The provider states explicitly that a JSON content type
+    causes signature failures on the ciloo/v1 namespace. The wc/v3 customer endpoints are documented
+    with application/json bodies.
+  response: application/json
+signature:
+  base_string: HTTP_METHOD & URL_ENCODED_BASE_URL & URL_ENCODED_PARAMETERS
+  parameters_included:
+  - oauth_* header parameters
+  - path/route parameters (e.g. asset_id)
+  - body parameters, for POST and PUT only
+  ordering: parameters sorted alphabetically, then rawurlencoded
+  signing_key: "rawurlencode(consumer_secret) + '&'  (no token secret)"
+  documented_weakness: >-
+    The provider documents that the implementation performs no timestamp or nonce validation, i.e. any
+    oauth_timestamp/oauth_nonce value is accepted. That removes OAuth 1.0a's replay protection.
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key, no request-deduplication header and no retry-safety contract is documented for
+    any endpoint. addCartItem, generateCustomerKeys and login-token issuance are all non-idempotent as
+    published. Recorded as a gap, not asserted as a capability.
+pagination:
+  supported: false
+  note: >-
+    The cart namespace returns the whole cart as a single keyed object with no page/limit parameters.
+    The wc/v3 customer endpoints inherit WooCommerce's page/per_page conventions, but Ciloo does not
+    document them.
+versioning:
+  scheme: uri-path-namespace
+  current: ciloo/v1
+  document_version: 2.0.0
+  note: >-
+    The REST namespace is versioned in the path (/wp-json/ciloo/v1/); the documentation carries its own
+    version and "last updated" date. The two are not the same version line.
+  see: lifecycle/ciloo-lifecycle.yml
+error_envelope:
+  format: bespoke
+  rfc9457: false
+  shape:
+    success: boolean
+    error: {code: string, message: string, details: string, timestamp: iso8601}
+    debug: {request_id: string, endpoint: string, method: string}
+  see: errors/ciloo-problem-types.yml
+request_tracing:
+  header: none
+  body_field: debug.request_id
+  note: >-
+    A request id is returned inside the error envelope (e.g. req_1692096000_abc123). No request-id
+    request or response header is documented.
+rate_limiting:
+  documented: false
+  note: >-
+    No published limits and no rate-limit response headers. The security guidance asks integrators to
+    implement client-side throttling, which implies no server-side signal is returned.
+  see: rate-limits/ciloo-rate-limits.yml
+tenancy:
+  model: per-brand-store host
+  note: >-
+    There is no single api.ciloo.com base for the Cart API. Every brand store is its own host — a
+    Ciloo-hosted <tenant>.cilooprint.com subdomain or a customer-owned domain — and the API is served
+    from /wp-json on that host. The documentation writes the base as https://your-domain.com/wp-json/ciloo/v1/.
+session_handoff:
+  mechanism: auto-login URL
+  format: "{base_url}?action=autologin&token=<token>&path=/desired-path"
+  token_ttl_seconds: 3600
+  paths:
+  - value: ''
+    destination: Customer portal homepage
+  - value: /cart
+    destination: Shopping cart
+  - value: /my-account/orders
+    destination: Order history
+callbacks:
+  outbound: see asyncapi/ciloo-printer-webhooks.yml
+  signing: none documented

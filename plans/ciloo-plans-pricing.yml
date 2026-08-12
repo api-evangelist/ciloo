@@ -1,0 +1,23 @@
+generated: '2026-08-12'
+method: searched
+source: https://ciloo.com/
+plan_count: 0
+plans: []
+note: >-
+  Ciloo publishes no pricing. There is no pricing page (https://ciloo.com/pricing/ returns 404 and no
+  pricing link appears in the site navigation, footer or sitemap), no plan tiers, and no published API
+  pricing. The commercial motion is enterprise: the site's calls to action are "book a demo" and
+  "request a quote", and the marketing copy quotes only a comparative claim of "up to 60% cost savings"
+  rather than any rate. API access is bundled with a brand-store contract, not sold separately.
+sales_motion: contact-sales
+sign_up:
+  public_self_serve: false
+  note: >-
+    Brand stores are provisioned per enterprise customer; each store's login is its own host and there
+    is no public developer sign-up.
+  url: https://ciloo.com/book-a-demo/
+evidence:
+- {url: 'https://ciloo.com/pricing/', status: 404}
+- {url: 'https://ciloo.com/book-a-demo/', status: 200}
+- {url: 'https://ciloo.com/', status: 200}
+- {url: 'https://api.cilooprint.com/ciloo-cart-api-documentation/', status: 200, note: no pricing or quota section}

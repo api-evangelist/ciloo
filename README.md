@@ -42,5 +42,24 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Global On Demand Platform for Branded Products is a company surfaced via the API Evangelist harvest backlog (source: marketing-integration-graph) and added to the network as a stub for full-pipeline profiling.
+Ciloo is a Rotterdam-headquartered global platform for branded products and promotional merchandise.
+Enterprises run a branded Ciloo store, and every order placed in it is produced on demand by a
+production partner near the recipient.
+
+Ciloo documents two APIs on its own knowledge centre at
+[api.cilooprint.com](https://api.cilooprint.com/):
+
+- **[Ciloo Cart API](https://api.cilooprint.com/ciloo-cart-api-documentation/)** — OAuth 1.0a
+  (HMAC-SHA1) REST API on the `ciloo/v1` namespace of a brand store: cart read/write, per-customer key
+  provisioning, and one-hour auto-login tokens. A first-party Postman collection is published for
+  download; there is no provider OpenAPI, so the description in `openapi/` was generated from the
+  reference and that collection.
+- **[Ciloo Printer API Integration](https://api.cilooprint.com/printer-api-integration/)** —
+  bidirectional order and status callbacks between Ciloo and its production partners, captured as a
+  webhook catalog in `asyncapi/`.
+
+Note that there is no single shared API host: each brand store is its own hostname
+(`<tenant>.cilooprint.com` or a customer-owned domain) and the API is served from `/wp-json` on it.
+
 - https://ciloo.com/
+- https://api.cilooprint.com/

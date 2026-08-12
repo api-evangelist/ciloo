@@ -1,0 +1,64 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/ciloo-cart-api-openapi.yml
+docs: https://api.cilooprint.com/ciloo-cart-api-documentation/
+format: bespoke
+rfc9457: false
+envelope:
+  success: false
+  error:
+    code: string
+    message: string
+    details: string
+    timestamp: ISO 8601
+  debug:
+    request_id: string
+    endpoint: string
+    method: string
+note: >-
+  Ciloo does not publish an error-code registry. Only one error code is named anywhere in the
+  documentation — OAUTH_SIGNATURE_INVALID — and the provider states it accounts for roughly 80% of
+  reported integration problems. The remaining rows below are the HTTP status classes the documented
+  envelope covers, not invented codes; where Ciloo names no code, `code` is null.
+problems:
+- status: 401
+  code: OAUTH_SIGNATURE_INVALID
+  title: OAuth signature validation failed
+  detail: The provided signature does not match the expected signature.
+  remediation:
+  - Send Content-Type application/x-www-form-urlencoded (a JSON content type breaks the signature).
+  - Include every form parameter in the signature base string.
+  - Sort parameters alphabetically before encoding.
+  - URL-encode the signature base string correctly.
+  - Include path/route parameters (such as asset_id) in the base string.
+  - Merge body parameters into the base string for POST and PUT only.
+  source: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  source_operations:
+  - openapi/ciloo-cart-api-openapi.yml#getCartItems
+  - openapi/ciloo-cart-api-openapi.yml#addCartItem
+  - openapi/ciloo-cart-api-openapi.yml#updateCartItem
+  - openapi/ciloo-cart-api-openapi.yml#removeCartItem
+  - openapi/ciloo-cart-api-openapi.yml#generateCustomerKeys
+  - openapi/ciloo-cart-api-openapi.yml#generateLoginToken
+- status: 400
+  code: null
+  title: Request rejected
+  detail: >-
+    Returned in the same envelope for malformed or incomplete requests (missing required cart item
+    fields, unusable callback_url, and similar). Ciloo publishes no code for this class.
+  source_operations:
+  - openapi/ciloo-cart-api-openapi.yml#addCartItem
+  - openapi/ciloo-cart-api-openapi.yml#updateCartItem
+  - openapi/ciloo-cart-api-openapi.yml#createCustomer
+- status: 401
+  code: null
+  title: Authentication failed
+  detail: >-
+    Basic-auth failure on generateCustomerLoginToken, or an unknown/revoked consumer key on the OAuth
+    endpoints.
+  source_operations:
+  - openapi/ciloo-cart-api-openapi.yml#generateCustomerLoginToken
+gaps:
+- No published error-code registry beyond the single OAuth signature code.
+- No problem+json / RFC 9457 support; the envelope is bespoke.
+- No documented status codes per operation; the reference shows success bodies only.

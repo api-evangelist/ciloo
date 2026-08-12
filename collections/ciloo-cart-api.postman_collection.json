@@ -1,0 +1,961 @@
+{
+	"info": {
+		"_postman_id": "32635d52-206d-438b-a877-dca0d9db4361",
+		"name": "Ciloo Cart API - Generic Implemetation",
+		"description": "Collection for Ciloo WooCommerce Cart API.\n\n- Please add variables firs.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47596066",
+		"_collection_link": "https://imranh992200-7879031.postman.co/workspace/d8d3ec04-4376-44fa-8790-de8d1e624fea/collection/47596066-32635d52-206d-438b-a877-dca0d9db4361?action=share&source=collection_link&creator=47596066"
+	},
+	"item": [
+		{
+			"name": "Search for Customers",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "consumerSecret",
+							"value": "{{consumer_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{consumer_key}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-WP-Nonce",
+						"value": "SxlUSKr9qZV",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/wp-json/ciloo/v1/cart",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"ciloo",
+						"v1",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a New User Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				},
+				"protocolVersion": "http1",
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{admin_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{admin_key}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"john.doe@example.com\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"john_doe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/wp-json/wc/v3/customers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"wc",
+						"v3",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "consumerSecret",
+							"value": "{{admin_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{admin_key}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"apiFN\",\n    \"last_name\": \"apiLN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/wp-json/wc/v3/customers/877",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"wc",
+						"v3",
+						"customers",
+						"877"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Customer Keys",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "version",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{admin_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{admin_key}}",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-WP-Nonce",
+						"value": "SxlUSKr9qZV",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "customer_id",
+							"value": "21712",
+							"type": "text"
+						},
+						{
+							"key": "callback_url",
+							"value": "https://dashboard.ciloo.dev/siteflow-callback/inbound/",
+							"description": "Please change this to your endpoint. Customer Keys will be shared here.",
+							"type": "text"
+						},
+						{
+							"key": "return_keys",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/wp-json/ciloo/v1/generate_customer_keys",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"ciloo",
+						"v1",
+						"generate_customer_keys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cart Items",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "consumerSecret",
+							"value": "{{consumer_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{consumer_key}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-WP-Nonce",
+						"value": "SxlUSKr9qZV",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/wp-json/ciloo/v1/cart",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"ciloo",
+						"v1",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add to Cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "includeBodyHash",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "disableHeaderEncoding",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "{{consumer_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{consumer_key}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-WP-Nonce",
+						"value": "SxlUSKr9qZV",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "quantity",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "filename",
+							"value": "test_file_name.pdf",
+							"type": "text"
+						},
+						{
+							"key": "productUid",
+							"value": "Coloo_Business_Card_001",
+							"type": "text"
+						},
+						{
+							"key": "pages",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "https://test.test/sample_pdf.pdf",
+							"type": "text"
+						},
+						{
+							"key": "asset_id",
+							"value": "Ciloo-Card-002",
+							"type": "text"
+						},
+						{
+							"key": "item_sku",
+							"value": "TEST-SKU",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/wp-json/ciloo/v1/cart/add-item",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"ciloo",
+						"v1",
+						"cart",
+						"add-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Cart Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "consumerSecret",
+							"value": "{{consumer_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{consumer_key}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/wp-json/ciloo/v1/cart/items/Ciloo-Card-001",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"ciloo",
+						"v1",
+						"cart",
+						"items",
+						"Ciloo-Card-001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Cart Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "consumerSecret",
+							"value": "{{consumer_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{consumer_key}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "quantity",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/wp-json/ciloo/v1/cart/items/Ciloo-Card-001",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"ciloo",
+						"v1",
+						"cart",
+						"items",
+						"Ciloo-Card-001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Login Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "consumerSecret",
+							"value": "{{consumer_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "{{consumer_key}}",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ip_address",
+							"value": "127.0.0.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/wp-json/ciloo/v1/login-token",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"wp-json",
+						"ciloo",
+						"v1",
+						"login-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Login Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "cs_9ae56a7498ju778e7388f757sdf764ss9s25c68c",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ck_9ae56a7498ju778e7388f757sdf764ss9s25c68c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ip_address",
+							"value": "127.0.0.1",
+							"type": "text"
+						},
+						{
+							"key": "user_email",
+							"value": "xyz@example.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://xyz.example.com/wp-json/ciloo/v1/customer-login-token",
+					"protocol": "https",
+					"host": [
+						"xyz",
+						"example",
+						"com"
+					],
+					"path": [
+						"wp-json",
+						"ciloo",
+						"v1",
+						"customer-login-token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://ciloo-local.test"
+		},
+		{
+			"key": "admin_key",
+			"value": "admin-key-placeholder"
+		},
+		{
+			"key": "admin_secret",
+			"value": "admin-secret-placeholder"
+		},
+		{
+			"key": "consumer_key",
+			"value": "consumer-key-placeholder"
+		},
+		{
+			"key": "consumer_secret",
+			"value": "consumer-secret-placeholder"
+		}
+	]
+}
