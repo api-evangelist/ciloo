@@ -1,961 +1,2563 @@
 {
-	"info": {
-		"_postman_id": "32635d52-206d-438b-a877-dca0d9db4361",
-		"name": "Ciloo Cart API - Generic Implemetation",
-		"description": "Collection for Ciloo WooCommerce Cart API.\n\n- Please add variables firs.",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "47596066",
-		"_collection_link": "https://imranh992200-7879031.postman.co/workspace/d8d3ec04-4376-44fa-8790-de8d1e624fea/collection/47596066-32635d52-206d-438b-a877-dca0d9db4361?action=share&source=collection_link&creator=47596066"
-	},
-	"item": [
-		{
-			"name": "Search for Customers",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept-encoding": true,
-					"accept": true
-				}
-			},
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "consumerSecret",
-							"value": "{{consumer_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{consumer_key}}",
-							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "version",
-							"value": "",
-							"type": "string"
-						},
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "X-WP-Nonce",
-						"value": "SxlUSKr9qZV",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "{{base_url}}/wp-json/ciloo/v1/cart",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"ciloo",
-						"v1",
-						"cart"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create a New User Account",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				},
-				"protocolVersion": "http1",
-				"strictSSL": false
-			},
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
-						},
-						{
-							"key": "consumerSecret",
-							"value": "{{admin_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{admin_key}}",
-							"type": "string"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "version",
-							"value": "1.0",
-							"type": "string"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\": \"john.doe@example.com\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"john_doe\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/wp-json/wc/v3/customers",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"wc",
-						"v3",
-						"customers"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update a Customer",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "consumerSecret",
-							"value": "{{admin_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{admin_key}}",
-							"type": "string"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "version",
-							"value": "1.0",
-							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": false,
-							"type": "boolean"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"first_name\": \"apiFN\",\n    \"last_name\": \"apiLN\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/wp-json/wc/v3/customers/877",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"wc",
-						"v3",
-						"customers",
-						"877"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Generate Customer Keys",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "version",
-							"value": "",
-							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
-						},
-						{
-							"key": "consumerSecret",
-							"value": "{{admin_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{admin_key}}",
-							"type": "string"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text",
-						"disabled": true
-					},
-					{
-						"key": "X-WP-Nonce",
-						"value": "SxlUSKr9qZV",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "customer_id",
-							"value": "21712",
-							"type": "text"
-						},
-						{
-							"key": "callback_url",
-							"value": "https://dashboard.ciloo.dev/siteflow-callback/inbound/",
-							"description": "Please change this to your endpoint. Customer Keys will be shared here.",
-							"type": "text"
-						},
-						{
-							"key": "return_keys",
-							"value": "1",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{base_url}}/wp-json/ciloo/v1/generate_customer_keys",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"ciloo",
-						"v1",
-						"generate_customer_keys"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Cart Items",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept-encoding": true,
-					"accept": true
-				}
-			},
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "consumerSecret",
-							"value": "{{consumer_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{consumer_key}}",
-							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "version",
-							"value": "",
-							"type": "string"
-						},
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "X-WP-Nonce",
-						"value": "SxlUSKr9qZV",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "{{base_url}}/wp-json/ciloo/v1/cart",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"ciloo",
-						"v1",
-						"cart"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add to Cart",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "includeBodyHash",
-							"value": false,
-							"type": "boolean"
-						},
-						{
-							"key": "disableHeaderEncoding",
-							"value": false,
-							"type": "boolean"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						},
-						{
-							"key": "consumerSecret",
-							"value": "{{consumer_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{consumer_key}}",
-							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "version",
-							"value": "",
-							"type": "string"
-						},
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-WP-Nonce",
-						"value": "SxlUSKr9qZV",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "quantity",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "filename",
-							"value": "test_file_name.pdf",
-							"type": "text"
-						},
-						{
-							"key": "productUid",
-							"value": "Coloo_Business_Card_001",
-							"type": "text"
-						},
-						{
-							"key": "pages",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "url",
-							"value": "https://test.test/sample_pdf.pdf",
-							"type": "text"
-						},
-						{
-							"key": "asset_id",
-							"value": "Ciloo-Card-002",
-							"type": "text"
-						},
-						{
-							"key": "item_sku",
-							"value": "TEST-SKU",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{base_url}}/wp-json/ciloo/v1/cart/add-item",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"ciloo",
-						"v1",
-						"cart",
-						"add-item"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Remove Cart Item",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "consumerSecret",
-							"value": "{{consumer_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{consumer_key}}",
-							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "version",
-							"value": "1.0",
-							"type": "string"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/wp-json/ciloo/v1/cart/items/Ciloo-Card-001",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"ciloo",
-						"v1",
-						"cart",
-						"items",
-						"Ciloo-Card-001"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update Cart Item",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "consumerSecret",
-							"value": "{{consumer_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{consumer_key}}",
-							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "version",
-							"value": "1.0",
-							"type": "string"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "quantity",
-							"value": "10",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{base_url}}/wp-json/ciloo/v1/cart/items/Ciloo-Card-001",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"ciloo",
-						"v1",
-						"cart",
-						"items",
-						"Ciloo-Card-001"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Login Token",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "oauth1",
-					"oauth1": [
-						{
-							"key": "consumerSecret",
-							"value": "{{consumer_secret}}",
-							"type": "string"
-						},
-						{
-							"key": "consumerKey",
-							"value": "{{consumer_key}}",
-							"type": "string"
-						},
-						{
-							"key": "addParamsToHeader",
-							"value": true,
-							"type": "boolean"
-						},
-						{
-							"key": "signatureMethod",
-							"value": "HMAC-SHA1",
-							"type": "string"
-						},
-						{
-							"key": "version",
-							"value": "1.0",
-							"type": "string"
-						},
-						{
-							"key": "addEmptyParamsToSign",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "ip_address",
-							"value": "127.0.0.1",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{base_url}}/wp-json/ciloo/v1/login-token",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"wp-json",
-						"ciloo",
-						"v1",
-						"login-token"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Customer Login Token",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "cs_9ae56a7498ju778e7388f757sdf764ss9s25c68c",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "ck_9ae56a7498ju778e7388f757sdf764ss9s25c68c",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "ip_address",
-							"value": "127.0.0.1",
-							"type": "text"
-						},
-						{
-							"key": "user_email",
-							"value": "xyz@example.com",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "https://xyz.example.com/wp-json/ciloo/v1/customer-login-token",
-					"protocol": "https",
-					"host": [
-						"xyz",
-						"example",
-						"com"
-					],
-					"path": [
-						"wp-json",
-						"ciloo",
-						"v1",
-						"customer-login-token"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "base_url",
-			"value": "http://ciloo-local.test"
-		},
-		{
-			"key": "admin_key",
-			"value": "admin-key-placeholder"
-		},
-		{
-			"key": "admin_secret",
-			"value": "admin-secret-placeholder"
-		},
-		{
-			"key": "consumer_key",
-			"value": "consumer-key-placeholder"
-		},
-		{
-			"key": "consumer_secret",
-			"value": "consumer-secret-placeholder"
-		}
-	]
+  "item": [
+    {
+      "id": "da76592c-fbc4-40de-9a71-4574a2b22801",
+      "name": "Cart",
+      "description": {
+        "content": "Cart item read/write operations on the ciloo/v1 namespace.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1bdfc077-fafa-4c23-9969-c2cb683db6d5",
+          "name": "Get cart items",
+          "request": {
+            "name": "Get cart items",
+            "description": {
+              "content": "Retrieve all items currently in the customer's shopping cart with detailed metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "ciloo",
+                "v1",
+                "cart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth1",
+              "oauth1": [
+                {
+                  "key": "consumerSecret",
+                  "value": "{{consumerSecret}}"
+                },
+                {
+                  "key": "consumerKey",
+                  "value": "{{consumerKey}}"
+                },
+                {
+                  "key": "addParamsToHeader",
+                  "value": true
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed6f3acc-73bc-425d-acbd-9909ff88c4e0",
+              "name": "Cart contents for the authenticated customer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"cart_items\": {\n    \"asset-business-card-001\": {\n      \"quantity\": 2,\n      \"filename\": \"premium-business-card.pdf\",\n      \"productUid\": \"Business_Card_Premium_001\",\n      \"pages\": 1,\n      \"url\": \"https://example.com/files/premium-business-card.pdf\",\n      \"item_sku\": \"BC-PREM-001\",\n      \"product_id\": 1234\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "267c6f2e-0a7b-466c-a809-f53c3d7ba8e1",
+              "name": "Request rejected. Returns the documented error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"string\",\n    \"timestamp\": \"1955-11-04T20:22:24.897Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"string\",\n    \"endpoint\": \"string\",\n    \"method\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76d3d607-d60d-43fd-9977-1c8772ab8d20",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0497a4d-5e08-4bbb-a245-70cad28279b0",
+          "name": "Add item to cart",
+          "request": {
+            "name": "Add item to cart",
+            "description": {
+              "content": "Add a new item to the customer's cart with complete product metadata and file information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "ciloo",
+                "v1",
+                "cart",
+                "add-item"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth1",
+              "oauth1": [
+                {
+                  "key": "consumerSecret",
+                  "value": "{{consumerSecret}}"
+                },
+                {
+                  "key": "consumerKey",
+                  "value": "{{consumerKey}}"
+                },
+                {
+                  "key": "addParamsToHeader",
+                  "value": true
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "asset_id",
+                  "value": "<string>",
+                  "description": "(Required) Unique identifier for the cart item."
+                },
+                {
+                  "disabled": false,
+                  "key": "quantity",
+                  "value": "<integer>",
+                  "description": "(Required) Number of items to add."
+                },
+                {
+                  "disabled": false,
+                  "key": "filename",
+                  "value": "<string>",
+                  "description": "(Required) Original filename."
+                },
+                {
+                  "disabled": false,
+                  "key": "productUid",
+                  "value": "<string>",
+                  "description": "(Required) Product identifier from your system."
+                },
+                {
+                  "disabled": false,
+                  "key": "pages",
+                  "value": "<integer>",
+                  "description": "(Required) Number of pages in the file."
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) Direct URL to the file."
+                },
+                {
+                  "disabled": false,
+                  "key": "item_sku",
+                  "value": "<string>",
+                  "description": "(Required) SKU for the item/product."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "381dffad-3672-4cfd-ad63-7f781dccd0c9",
+              "name": "Item added to the cart.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "add-item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for the cart item.",
+                        "type": "text/plain"
+                      },
+                      "key": "asset_id",
+                      "value": "business-card-001"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Number of items to add.",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Original filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "filename",
+                      "value": "business-card.pdf"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Product identifier from your system.",
+                        "type": "text/plain"
+                      },
+                      "key": "productUid",
+                      "value": "Business_Card_001"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Number of pages in the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "pages",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Direct URL to the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/file.pdf"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) SKU for the item/product.",
+                        "type": "text/plain"
+                      },
+                      "key": "item_sku",
+                      "value": "BC-PREM-001"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d94868a-130c-4fb7-be3c-d2d1eee9f03a",
+              "name": "Request rejected. Returns the documented error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "add-item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for the cart item.",
+                        "type": "text/plain"
+                      },
+                      "key": "asset_id",
+                      "value": "business-card-001"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Number of items to add.",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Original filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "filename",
+                      "value": "business-card.pdf"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Product identifier from your system.",
+                        "type": "text/plain"
+                      },
+                      "key": "productUid",
+                      "value": "Business_Card_001"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Number of pages in the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "pages",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Direct URL to the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/file.pdf"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) SKU for the item/product.",
+                        "type": "text/plain"
+                      },
+                      "key": "item_sku",
+                      "value": "BC-PREM-001"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"string\",\n    \"timestamp\": \"1955-11-04T20:22:24.897Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"string\",\n    \"endpoint\": \"string\",\n    \"method\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a993680e-aefe-4c86-91bb-ef53bd24ce37",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "add-item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for the cart item.",
+                        "type": "text/plain"
+                      },
+                      "key": "asset_id",
+                      "value": "business-card-001"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Number of items to add.",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Original filename.",
+                        "type": "text/plain"
+                      },
+                      "key": "filename",
+                      "value": "business-card.pdf"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Product identifier from your system.",
+                        "type": "text/plain"
+                      },
+                      "key": "productUid",
+                      "value": "Business_Card_001"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Number of pages in the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "pages",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Direct URL to the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "https://example.com/file.pdf"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) SKU for the item/product.",
+                        "type": "text/plain"
+                      },
+                      "key": "item_sku",
+                      "value": "BC-PREM-001"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f8d7956-c181-4f74-b472-1f151fa66381",
+          "name": "Update cart item",
+          "request": {
+            "name": "Update cart item",
+            "description": {
+              "content": "Modify the quantity of an existing cart item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "ciloo",
+                "v1",
+                "cart",
+                "items",
+                ":asset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset_id",
+                  "description": "(Required) The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+                },
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth1",
+              "oauth1": [
+                {
+                  "key": "consumerSecret",
+                  "value": "{{consumerSecret}}"
+                },
+                {
+                  "key": "consumerKey",
+                  "value": "{{consumerKey}}"
+                },
+                {
+                  "key": "addParamsToHeader",
+                  "value": true
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "quantity",
+                  "value": "<integer>",
+                  "description": "(Required) The new quantity for the cart item."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "31dcc52b-f6a7-4200-b962-c83c4c9af924",
+              "name": "Cart item updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "items",
+                    ":asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_id",
+                      "description": "(Required) The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The new quantity for the cart item.",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "5"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d9d94d3-9c76-4178-a2b1-c3ee5a8dab40",
+              "name": "Request rejected. Returns the documented error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "items",
+                    ":asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_id",
+                      "description": "(Required) The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The new quantity for the cart item.",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "5"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"string\",\n    \"timestamp\": \"1955-11-04T20:22:24.897Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"string\",\n    \"endpoint\": \"string\",\n    \"method\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0cc730a-fad8-4da7-898e-3c5f2f915aca",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "items",
+                    ":asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_id",
+                      "description": "(Required) The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The new quantity for the cart item.",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "5"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa9edd82-f2e6-4cee-860c-7bdf0a7b8380",
+          "name": "Remove cart item",
+          "request": {
+            "name": "Remove cart item",
+            "description": {
+              "content": "Completely remove an item from the customer's cart. The provider documents this action as irreversible.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "ciloo",
+                "v1",
+                "cart",
+                "items",
+                ":asset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset_id",
+                  "description": "(Required) The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+                },
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth1",
+              "oauth1": [
+                {
+                  "key": "consumerSecret",
+                  "value": "{{consumerSecret}}"
+                },
+                {
+                  "key": "consumerKey",
+                  "value": "{{consumerKey}}"
+                },
+                {
+                  "key": "addParamsToHeader",
+                  "value": true
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b0410f09-c5a2-4bb3-904f-bdfd2fd05121",
+              "name": "Cart item removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "items",
+                    ":asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_id",
+                      "description": "(Required) The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb5ece30-ab90-4221-a339-e56c2e6b5755",
+              "name": "Request rejected. Returns the documented error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "items",
+                    ":asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_id",
+                      "description": "(Required) The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"string\",\n    \"timestamp\": \"1955-11-04T20:22:24.897Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"string\",\n    \"endpoint\": \"string\",\n    \"method\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a88327b6-8ae0-46f9-9216-73dd15e0fdb3",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "cart",
+                    "items",
+                    ":asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_id",
+                      "description": "(Required) The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "05b65c99-a8f1-44d2-8e4c-80608f0de505",
+      "name": "Authentication",
+      "description": {
+        "content": "OAuth key provisioning and auto-login token issuance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1fedc8c1-96e9-4309-b734-60a3585bbb1d",
+          "name": "Generate customer OAuth keys",
+          "request": {
+            "name": "Generate customer OAuth keys",
+            "description": {
+              "content": "Use admin-level OAuth credentials to generate unique OAuth 1.0a keys for one customer. Generated keys are POSTed to the supplied callback_url; set return_keys=1 to also return them in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "ciloo",
+                "v1",
+                "generate_customer_keys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth1",
+              "oauth1": [
+                {
+                  "key": "consumerSecret",
+                  "value": "{{consumerSecret}}"
+                },
+                {
+                  "key": "consumerKey",
+                  "value": "{{consumerKey}}"
+                },
+                {
+                  "key": "addParamsToHeader",
+                  "value": true
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "customer_id",
+                  "value": "<integer>",
+                  "description": "(Required) Customer ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback_url",
+                  "value": "<uri>",
+                  "description": "(Required) Your endpoint that will receive the generated keys via secure POST."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_keys",
+                  "value": "<integer>",
+                  "description": "Set to 1 to return keys in the response."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ae45af3-ec6e-432d-8b58-969d9cfa7c4c",
+              "name": "Customer keys generated and dispatched to the callback URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "generate_customer_keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Customer ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "customer_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your endpoint that will receive the generated keys via secure POST.",
+                        "type": "text/plain"
+                      },
+                      "key": "callback_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to 1 to return keys in the response.",
+                        "type": "text/plain"
+                      },
+                      "key": "return_keys",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "841805ee-2bea-48d6-a785-04f9c2c4c12a",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "generate_customer_keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Customer ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "customer_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your endpoint that will receive the generated keys via secure POST.",
+                        "type": "text/plain"
+                      },
+                      "key": "callback_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to 1 to return keys in the response.",
+                        "type": "text/plain"
+                      },
+                      "key": "return_keys",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b28d4cd-dd65-4fdd-9348-6bf330979aab",
+          "name": "Generate auto-login token",
+          "request": {
+            "name": "Generate auto-login token",
+            "description": {
+              "content": "Generate a secure, time-limited auto-login token for seamless customer authentication and cart access. Tokens expire after 1 hour. The token is used as {base_url}?action=autologin&token=...&path=/cart.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "ciloo",
+                "v1",
+                "login-token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth1",
+              "oauth1": [
+                {
+                  "key": "consumerSecret",
+                  "value": "{{consumerSecret}}"
+                },
+                {
+                  "key": "consumerKey",
+                  "value": "{{consumerKey}}"
+                },
+                {
+                  "key": "addParamsToHeader",
+                  "value": true
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "ip_address",
+                  "value": "<string>",
+                  "description": "(Required) Customer's IP address, used for security validation."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bd65c012-f3c8-444b-89f0-088f754e27d3",
+              "name": "Auto-login token issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "login-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Customer's IP address, used for security validation.",
+                        "type": "text/plain"
+                      },
+                      "key": "ip_address",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"data\": {\n    \"token\": \"string\",\n    \"expiry\": 3600\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c7439a0-37a4-438c-aa5b-b0c6bab195a1",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "login-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Customer's IP address, used for security validation.",
+                        "type": "text/plain"
+                      },
+                      "key": "ip_address",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e6a1c02-77f0-4a91-9986-f5e6237efe5b",
+          "name": "Generate customer login token (Basic auth)",
+          "request": {
+            "name": "Generate customer login token (Basic auth)",
+            "description": {
+              "content": "Look a customer up by email address and issue an auto-login token. The provider documents this as the one endpoint that uses HTTP Basic authentication (consumer key/secret as username/password) instead of OAuth 1.0a.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "ciloo",
+                "v1",
+                "customer-login-token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "user_email",
+                  "value": "<email>",
+                  "description": "(Required) Customer's email address for user lookup."
+                },
+                {
+                  "disabled": false,
+                  "key": "ip_address",
+                  "value": "<string>",
+                  "description": "(Required) Customer's IP address for security validation."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5bf8f685-7827-4154-a2c4-e89cd6db93f5",
+              "name": "Auto-login token issued for the looked-up customer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "customer-login-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Customer's email address for user lookup.",
+                        "type": "text/plain"
+                      },
+                      "key": "user_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Customer's IP address for security validation.",
+                        "type": "text/plain"
+                      },
+                      "key": "ip_address",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de5fdfa5-bde6-4f9e-a49c-92bbd7250d8a",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "ciloo",
+                    "v1",
+                    "customer-login-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Customer's email address for user lookup.",
+                        "type": "text/plain"
+                      },
+                      "key": "user_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Customer's IP address for security validation.",
+                        "type": "text/plain"
+                      },
+                      "key": "ip_address",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ee0f322e-70eb-4fa4-a362-68e46b70a33a",
+      "name": "Customers",
+      "description": {
+        "content": "Customer lifecycle via the WooCommerce REST API v3 namespace, as documented by Ciloo.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8515746b-a878-40a0-9d83-9a6604c8f880",
+          "name": "Create customer",
+          "request": {
+            "name": "Create customer",
+            "description": {
+              "content": "Create a new customer account with optional billing and shipping information. This is the WooCommerce REST API v3 namespace, documented by Ciloo as the customer half of the cart integration flow.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "wc",
+                "v3",
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth1",
+              "oauth1": [
+                {
+                  "key": "consumerSecret",
+                  "value": "{{consumerSecret}}"
+                },
+                {
+                  "key": "consumerKey",
+                  "value": "{{consumerKey}}"
+                },
+                {
+                  "key": "addParamsToHeader",
+                  "value": true
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"billing\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"company\": \"<string>\",\n    \"address_1\": \"<string>\",\n    \"address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"shipping\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"company\": \"<string>\",\n    \"address_1\": \"<string>\",\n    \"address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24524831-a5a8-451b-9d24-e60ad61147ca",
+              "name": "Customer created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "wc",
+                    "v3",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"username\": \"john_doe\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9161,\n  \"email\": \"zSa-Tru@TmwQfkvBRkHreKUgATDWaBFQhKTohXB.cqb\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"username\": \"string\",\n  \"password\": \"string\",\n  \"billing\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company\": \"string\",\n    \"address_1\": \"string\",\n    \"address_2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postcode\": \"string\",\n    \"country\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\"\n  },\n  \"shipping\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company\": \"string\",\n    \"address_1\": \"string\",\n    \"address_2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postcode\": \"string\",\n    \"country\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7932f7d8-48fc-42a6-9556-4f8c71da2e1e",
+              "name": "Request rejected. Returns the documented error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "wc",
+                    "v3",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"username\": \"john_doe\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"string\",\n    \"timestamp\": \"1955-11-04T20:22:24.897Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"string\",\n    \"endpoint\": \"string\",\n    \"method\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33e854e4-b4b8-49c5-8682-652223a7b635",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "wc",
+                    "v3",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"username\": \"john_doe\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13cc939c-4d21-42cb-9676-b675a1250e6d",
+          "name": "Update customer",
+          "request": {
+            "name": "Update customer",
+            "description": {
+              "content": "Update existing customer information including profile details, billing and shipping addresses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wp-json",
+                "wc",
+                "v3",
+                "customers",
+                ":customer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customer_id",
+                  "description": "(Required) The WooCommerce customer id returned by createCustomer."
+                },
+                {
+                  "description": "The hostname of your Ciloo brand store.",
+                  "type": "any",
+                  "value": "{{store_domain}}",
+                  "key": "store_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth1",
+              "oauth1": [
+                {
+                  "key": "consumerSecret",
+                  "value": "{{consumerSecret}}"
+                },
+                {
+                  "key": "consumerKey",
+                  "value": "{{consumerKey}}"
+                },
+                {
+                  "key": "addParamsToHeader",
+                  "value": true
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"billing\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"company\": \"<string>\",\n    \"address_1\": \"<string>\",\n    \"address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"shipping\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"company\": \"<string>\",\n    \"address_1\": \"<string>\",\n    \"address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e46650c6-e68b-470c-a3c7-20a21b4b4ce9",
+              "name": "Customer updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "wc",
+                    "v3",
+                    "customers",
+                    ":customer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer_id",
+                      "description": "(Required) The WooCommerce customer id returned by createCustomer."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"James\",\n  \"last_name\": \"Doe\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9161,\n  \"email\": \"zSa-Tru@TmwQfkvBRkHreKUgATDWaBFQhKTohXB.cqb\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"username\": \"string\",\n  \"password\": \"string\",\n  \"billing\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company\": \"string\",\n    \"address_1\": \"string\",\n    \"address_2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postcode\": \"string\",\n    \"country\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\"\n  },\n  \"shipping\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company\": \"string\",\n    \"address_1\": \"string\",\n    \"address_2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postcode\": \"string\",\n    \"country\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6f1117a-6330-4b0c-8172-502440de77f4",
+              "name": "Request rejected. Returns the documented error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "wc",
+                    "v3",
+                    "customers",
+                    ":customer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer_id",
+                      "description": "(Required) The WooCommerce customer id returned by createCustomer."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"James\",\n  \"last_name\": \"Doe\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"string\",\n    \"timestamp\": \"1955-11-04T20:22:24.897Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"string\",\n    \"endpoint\": \"string\",\n    \"method\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e85bdabb-de8d-4d53-a4e9-60bfacd66fe0",
+              "name": "Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wp-json",
+                    "wc",
+                    "v3",
+                    "customers",
+                    ":customer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer_id",
+                      "description": "(Required) The WooCommerce customer id returned by createCustomer."
+                    },
+                    {
+                      "description": "The hostname of your Ciloo brand store.",
+                      "type": "any",
+                      "value": "{{store_domain}}",
+                      "key": "store_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"James\",\n  \"last_name\": \"Doe\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"OAUTH_SIGNATURE_INVALID\",\n    \"message\": \"OAuth signature validation failed\",\n    \"details\": \"The provided signature does not match the expected signature\",\n    \"timestamp\": \"2025-08-16T10:30:00Z\"\n  },\n  \"debug\": {\n    \"request_id\": \"req_1692096000_abc123\",\n    \"endpoint\": \"/wp-json/ciloo/v1/cart/add-item\",\n    \"method\": \"POST\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The hostname of your Ciloo brand store.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "shop.ciloo.com",
+      "key": "store_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{store_domain}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0a5f644b-6995-412e-82e6-9034d8d5f0c4",
+    "name": "Ciloo Cart API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ciloo Cart API is the custom REST namespace (`ciloo/v1`) exposed by every Ciloo Print brand store for managing a customer's shopping cart, issuing time-limited auto-login tokens into the Ciloo Print Platform, and provisioning per-customer OAuth 1.0a credentials. Customer records themselves are created and updated through the WooCommerce REST API v3 (`wc/v3`) namespace that Ciloo documents alongside the cart namespace. Every operation below is transcribed from the provider's own published reference at https://api.cilooprint.com/ciloo-cart-api-documentation/ and its downloadable Postman collection; no operation, parameter or response has been invented.\n\nContact Support:\n Name: Ciloo Support\n Email: support@ciloo.com",
+      "type": "text/plain"
+    }
+  }
 }

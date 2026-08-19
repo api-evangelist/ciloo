@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ciloo Cart API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cart",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get cart items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{store_domain}/wp-json/ciloo/v1/cart"
+          },
+          "docs": "Retrieve all items currently in the customer's shopping cart with detailed metadata."
+        },
+        {
+          "info": {
+            "name": "Add item to cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{store_domain}/wp-json/ciloo/v1/cart/add-item",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "asset_id",
+                  "value": ""
+                },
+                {
+                  "name": "quantity",
+                  "value": ""
+                },
+                {
+                  "name": "filename",
+                  "value": ""
+                },
+                {
+                  "name": "productUid",
+                  "value": ""
+                },
+                {
+                  "name": "pages",
+                  "value": ""
+                },
+                {
+                  "name": "url",
+                  "value": ""
+                },
+                {
+                  "name": "item_sku",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add a new item to the customer's cart with complete product metadata and file information."
+        },
+        {
+          "info": {
+            "name": "Update cart item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{store_domain}/wp-json/ciloo/v1/cart/items/:asset_id",
+            "params": [
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "quantity",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Modify the quantity of an existing cart item."
+        },
+        {
+          "info": {
+            "name": "Remove cart item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{store_domain}/wp-json/ciloo/v1/cart/items/:asset_id",
+            "params": [
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "The asset_id of the cart item. Note the provider documents that route parameters are included in the OAuth 1.0a signature base string."
+              }
+            ]
+          },
+          "docs": "Completely remove an item from the customer's cart. The provider documents this action as irreversible."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate customer OAuth keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{store_domain}/wp-json/ciloo/v1/generate_customer_keys",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "customer_id",
+                  "value": ""
+                },
+                {
+                  "name": "callback_url",
+                  "value": ""
+                },
+                {
+                  "name": "return_keys",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Use admin-level OAuth credentials to generate unique OAuth 1.0a keys for one customer. Generated keys are POSTed to the supplied callback_url; set return_keys=1 to also return them in the response."
+        },
+        {
+          "info": {
+            "name": "Generate auto-login token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{store_domain}/wp-json/ciloo/v1/login-token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "ip_address",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Generate a secure, time-limited auto-login token for seamless customer authentication and cart access. Tokens expire after 1 hour. The token is used as {base_url}?action=autologin&token=...&path=/cart."
+        },
+        {
+          "info": {
+            "name": "Generate customer login token (Basic auth)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{store_domain}/wp-json/ciloo/v1/customer-login-token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "user_email",
+                  "value": ""
+                },
+                {
+                  "name": "ip_address",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Look a customer up by email address and issue an auto-login token. The provider documents this as the one endpoint that uses HTTP Basic authentication (consumer key/secret as username/password) instead of OAuth 1.0a."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{store_domain}/wp-json/wc/v3/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new customer account with optional billing and shipping information. This is the WooCommerce REST API v3 namespace, documented by Ciloo as the customer half of the cart integration flow."
+        },
+        {
+          "info": {
+            "name": "Update customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{store_domain}/wp-json/wc/v3/customers/:customer_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path",
+                "description": "The WooCommerce customer id returned by createCustomer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing customer information including profile details, billing and shipping addresses."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
