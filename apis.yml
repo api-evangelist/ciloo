@@ -24,6 +24,17 @@ tags:
 - Printing
 - Branded Merchandise
 - Promotional Products
+- Print on Demand
+- E-Commerce
+- Digital Asset Management
+- Procurement
+- Fulfillment
+- Marketing
+tags_raw:
+- Company
+- Printing
+- Branded Merchandise
+- Promotional Products
 - Print On Demand
 - eCommerce
 - Digital Asset Management
@@ -42,6 +53,11 @@ apis:
   humanURL: https://api.cilooprint.com/ciloo-cart-api-documentation/
   baseURL: https://{store_domain}/wp-json/ciloo/v1
   tags:
+  - Cart
+  - Customers
+  - Authentication
+  - Print on Demand
+  tags_raw:
   - Cart
   - Customers
   - Authentication
@@ -76,6 +92,11 @@ apis:
   humanURL: https://api.cilooprint.com/printer-api-integration/
   baseURL: https://dashboard.cilooprint.com/ciloo-order-callback/printer-inbound
   tags:
+  - Order
+  - Webhook
+  - Fulfillment
+  - Printing
+  tags_raw:
   - Orders
   - Webhooks
   - Fulfillment
