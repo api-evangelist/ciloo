@@ -46,10 +46,10 @@ apis:
   name: Ciloo Cart API
   description: >-
     OAuth 1.0a (HMAC-SHA1) REST API on the ciloo/v1 namespace of a Ciloo brand store. Read, add, update
-    and remove cart items; mint per-customer OAuth credentials from admin credentials; and issue
-    one-hour auto-login tokens that drop a customer straight into the store's cart or order history.
-    Customer records are created and updated through the WooCommerce wc/v3 namespace on the same host.
-    Requests are form-encoded — the provider documents that a JSON content type breaks the signature.
+    and remove cart items; mint per-customer OAuth credentials from admin credentials; and issue one-hour
+    auto-login tokens that drop a customer straight into the store's cart or order history. Customer records
+    are created and updated through the WooCommerce wc/v3 namespace on the same host. Requests are form-encoded
+    — the provider documents that a JSON content type breaks the signature.
   humanURL: https://api.cilooprint.com/ciloo-cart-api-documentation/
   baseURL: https://{store_domain}/wp-json/ciloo/v1
   tags:
@@ -86,9 +86,9 @@ apis:
   description: >-
     Bidirectional order integration between Ciloo and its production partners. Ciloo POSTs a print order
     — items, print components with artwork paths and substrate attributes, and shipments with carrier
-    and destination — to the partner's own order endpoint; the partner POSTs production-status and
-    shipping callbacks, with tracking, back to a Ciloo-owned inbound callback URL. Authentication is
-    agreed per partner rather than published.
+    and destination — to the partner's own order endpoint; the partner POSTs production-status and shipping
+    callbacks, with tracking, back to a Ciloo-owned inbound callback URL. Authentication is agreed per
+    partner rather than published.
   humanURL: https://api.cilooprint.com/printer-api-integration/
   baseURL: https://dashboard.cilooprint.com/ciloo-order-callback/printer-inbound
   tags:
@@ -106,6 +106,26 @@ apis:
     url: https://api.cilooprint.com/printer-api-integration/
   - type: Webhooks
     url: asyncapi/ciloo-printer-webhooks.yml
+- aid: ciloo:ciloo-authentication-api
+  name: Ciloo Authentication API
+  description: OAuth key provisioning and auto-login token issuance.
+  humanURL: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  baseURL: https://{store_domain}/wp-json/ciloo/v1
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/ciloo-authentication-api-openapi.yml
+- aid: ciloo:ciloo-customers-api
+  name: Ciloo Customers API
+  description: Customer lifecycle via the WooCommerce REST API v3 namespace, as documented by Ciloo.
+  humanURL: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  baseURL: https://{store_domain}/wp-json/ciloo/v1
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/ciloo-customers-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
