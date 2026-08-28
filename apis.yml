@@ -12,6 +12,18 @@ description: >-
   api.cilooprint.com: a per-brand-store Cart API secured with OAuth 1.0a, and a bidirectional Printer
   API integration that pushes orders to production partners and receives production and shipping status
   callbacks in return.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://ciloo.com/wp-content/uploads/2022/01/Ciloo-Logo-2021.png
 url: https://raw.githubusercontent.com/api-evangelist/ciloo/refs/heads/main/apis.yml
 x-type: company
