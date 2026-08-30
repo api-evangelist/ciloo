@@ -1,0 +1,214 @@
+openapi: 3.2.0
+info:
+  title: Ciloo Cart Customers API
+  version: 2.0.0
+  summary: OAuth 1.0a secured REST API for Ciloo brand-store cart, auto-login and customer operations.
+  description: The Ciloo Cart API is the custom REST namespace (`ciloo/v1`) exposed by every Ciloo Print brand store for managing a customer's shopping cart, issuing time-limited auto-login tokens into the Ciloo Print Platform, and provisioning per-customer OAuth 1.0a credentials. Customer records themselves are created and updated through the WooCommerce REST API v3 (`wc/v3`) namespace that Ciloo documents alongside the cart namespace. Every operation below is transcribed from the provider's own published reference at https://api.cilooprint.com/ciloo-cart-api-documentation/ and its downloadable Postman collection; no operation, parameter or response has been invented.
+  contact:
+    name: Ciloo Support
+    email: support@ciloo.com
+    url: https://api.cilooprint.com/ciloo-cart-api-documentation/
+  x-provenance:
+    generated: '2026-08-12'
+    method: generated
+    source:
+    - https://api.cilooprint.com/ciloo-cart-api-documentation/
+    - collections/ciloo-cart-api.postman_collection.json
+    note: Generated faithfully from the provider's published API reference and first-party Postman collection. Ciloo publishes no OpenAPI of its own; every path, method, parameter and example here is copied verbatim from those two provider-published sources.
+servers:
+- url: https://{store_domain}
+  description: A Ciloo brand store. Each customer brand store is its own host — a Ciloo-hosted <tenant>.cilooprint.com subdomain or a customer-owned domain (e.g. store.jacobs.com, hempelstore.com) — and the API lives under /wp-json on that same host. The documentation writes this as "https://your-domain.com/wp-json/ciloo/v1/".
+  variables:
+    store_domain:
+      default: shop.ciloo.com
+      description: The hostname of your Ciloo brand store.
+tags:
+- name: Customers
+  description: Customer lifecycle via the WooCommerce REST API v3 namespace, as documented by Ciloo.
+paths:
+  /wp-json/wc/v3/customers:
+    post:
+      operationId: createCustomer
+      summary: Create customer
+      description: Create a new customer account with optional billing and shipping information. This is the WooCommerce REST API v3 namespace, documented by Ciloo as the customer half of the cart integration flow.
+      tags:
+      - Customers
+      security:
+      - oauth1a: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerInput'
+            examples:
+              documented:
+                value:
+                  email: john.doe@example.com
+                  first_name: John
+                  last_name: Doe
+                  username: john_doe
+      responses:
+        '201':
+          description: Customer created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wp-json/wc/v3/customers/{customer_id}:
+    parameters:
+    - name: customer_id
+      in: path
+      required: true
+      description: The WooCommerce customer id returned by createCustomer.
+      schema:
+        type: integer
+    put:
+      operationId: updateCustomer
+      summary: Update customer
+      description: Update existing customer information including profile details, billing and shipping addresses.
+      tags:
+      - Customers
+      security:
+      - oauth1a: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerInput'
+            examples:
+              documented:
+                value:
+                  first_name: James
+                  last_name: Doe
+      responses:
+        '200':
+          description: Customer updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    BadRequest:
+      description: Request rejected. Returns the documented error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            documented:
+              value:
+                success: false
+                error:
+                  code: OAUTH_SIGNATURE_INVALID
+                  message: OAuth signature validation failed
+                  details: The provided signature does not match the expected signature
+                  timestamp: '2025-08-16T10:30:00Z'
+                debug:
+                  request_id: req_1692096000_abc123
+                  endpoint: /wp-json/ciloo/v1/cart/add-item
+                  method: POST
+  schemas:
+    Customer:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+            description: Customer id, used to generate customer OAuth keys.
+      - $ref: '#/components/schemas/CustomerInput'
+    ErrorResponse:
+      type: object
+      description: The documented Ciloo error envelope. Note this is a bespoke envelope, not RFC 9457 problem+json.
+      properties:
+        success:
+          type: boolean
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+        debug:
+          type: object
+          properties:
+            request_id:
+              type: string
+            endpoint:
+              type: string
+            method:
+              type: string
+    CustomerInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        billing:
+          $ref: '#/components/schemas/Address'
+        shipping:
+          $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+  securitySchemes:
+    oauth1a:
+      type: http
+      scheme: OAuth
+      description: 'OAuth 1.0a with the HMAC-SHA1 signature method (RFC 5849 "OAuth" HTTP authentication scheme). Required parameters: oauth_consumer_key, oauth_signature_method=HMAC-SHA1, oauth_timestamp, oauth_nonce, oauth_version=1.0, oauth_signature. Content-Type must be application/x-www-form-urlencoded — the provider documents that a JSON content type causes signature failures. Body parameters are merged into the signature base string for POST and PUT only; path parameters are included. The provider documents that timestamp and nonce values are not validated by the current implementation.'
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using the consumer key as username and consumer secret as password. Documented as used only by generateCustomerLoginToken.
