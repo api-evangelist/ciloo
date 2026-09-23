@@ -3,7 +3,7 @@ info:
   title: Ciloo Cart Authentication API
   version: 2.0.0
   summary: OAuth 1.0a secured REST API for Ciloo brand-store cart, auto-login and customer operations.
-  description: The Ciloo Cart API is the custom REST namespace (`ciloo/v1`) exposed by every Ciloo Print brand store for managing a customer's shopping cart, issuing time-limited auto-login tokens into the Ciloo Print Platform, and provisioning per-customer OAuth 1.0a credentials. Customer records themselves are created and updated through the WooCommerce REST API v3 (`wc/v3`) namespace that Ciloo documents alongside the cart namespace. Every operation below is transcribed from the provider's own published reference at https://api.cilooprint.com/ciloo-cart-api-documentation/ and its downloadable Postman collection; no operation, parameter or response has been invented.
+  description: The Ciloo Cart API is the custom REST namespace (`ciloo/v1`) exposed by every Ciloo Print brand store for managing a customer's shopping cart, issuing time-limited auto-login tokens into the Ciloo Print Platform, and provisioning per-customer OAuth 1.0a credentials.
   contact:
     name: Ciloo Support
     email: support@ciloo.com
