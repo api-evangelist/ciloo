@@ -147,26 +147,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            documented:
-              value:
-                success: false
-                error:
-                  code: OAUTH_SIGNATURE_INVALID
-                  message: OAuth signature validation failed
-                  details: The provided signature does not match the expected signature
-                  timestamp: '2025-08-16T10:30:00Z'
-                debug:
-                  request_id: req_1692096000_abc123
-                  endpoint: /wp-json/ciloo/v1/cart/add-item
-                  method: POST
   schemas:
     SuccessResponse:
       type: object
@@ -202,6 +182,26 @@ components:
               type: string
             method:
               type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            documented:
+              value:
+                success: false
+                error:
+                  code: OAUTH_SIGNATURE_INVALID
+                  message: OAuth signature validation failed
+                  details: The provided signature does not match the expected signature
+                  timestamp: '2025-08-16T10:30:00Z'
+                debug:
+                  request_id: req_1692096000_abc123
+                  endpoint: /wp-json/ciloo/v1/cart/add-item
+                  method: POST
   securitySchemes:
     oauth1a:
       type: http

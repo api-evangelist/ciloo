@@ -196,13 +196,28 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    SuccessResponse:
+    CartItem:
       type: object
+      description: One item in a Ciloo brand-store cart, keyed in responses by its asset_id.
       properties:
-        success:
-          type: boolean
-        data:
-          type: object
+        quantity:
+          type: integer
+        filename:
+          type: string
+        productUid:
+          type: string
+        pages:
+          type: integer
+        url:
+          type: string
+          format: uri
+        item_sku:
+          type: string
+        product_id:
+          type: integer
+        added_at:
+          type: string
+          format: date-time
     ErrorResponse:
       type: object
       description: The documented Ciloo error envelope. Note this is a bespoke envelope, not RFC 9457 problem+json.
@@ -247,35 +262,14 @@ components:
             last_updated:
               type: string
               format: date-time
-    CartItem:
+    SuccessResponse:
       type: object
-      description: One item in a Ciloo brand-store cart, keyed in responses by its asset_id.
       properties:
-        quantity:
-          type: integer
-        filename:
-          type: string
-        productUid:
-          type: string
-        pages:
-          type: integer
-        url:
-          type: string
-          format: uri
-        item_sku:
-          type: string
-        product_id:
-          type: integer
-        added_at:
-          type: string
-          format: date-time
+        success:
+          type: boolean
+        data:
+          type: object
   responses:
-    BadRequest:
-      description: Request rejected. Returns the documented error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
       content:
@@ -295,6 +289,12 @@ components:
                   request_id: req_1692096000_abc123
                   endpoint: /wp-json/ciloo/v1/cart/add-item
                   method: POST
+    BadRequest:
+      description: Request rejected. Returns the documented error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth1a:
       type: http
