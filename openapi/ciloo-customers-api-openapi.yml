@@ -99,14 +99,31 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Customer:
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: integer
-            description: Customer id, used to generate customer OAuth keys.
-      - $ref: '#/components/schemas/CustomerInput'
+    Address:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
     CustomerInput:
       type: object
       properties:
@@ -152,32 +169,21 @@ components:
               type: string
             method:
               type: string
-    Address:
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        company:
-          type: string
-        address_1:
-          type: string
-        address_2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postcode:
-          type: string
-        country:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
+    Customer:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: integer
+            description: Customer id, used to generate customer OAuth keys.
+      - $ref: '#/components/schemas/CustomerInput'
   responses:
+    BadRequest:
+      description: Request rejected. Returns the documented error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
       content:
@@ -197,12 +203,6 @@ components:
                   request_id: req_1692096000_abc123
                   endpoint: /wp-json/ciloo/v1/cart/add-item
                   method: POST
-    BadRequest:
-      description: Request rejected. Returns the documented error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth1a:
       type: http

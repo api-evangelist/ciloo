@@ -270,6 +270,12 @@ components:
         data:
           type: object
   responses:
+    BadRequest:
+      description: Request rejected. Returns the documented error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
       content:
@@ -289,12 +295,6 @@ components:
                   request_id: req_1692096000_abc123
                   endpoint: /wp-json/ciloo/v1/cart/add-item
                   method: POST
-    BadRequest:
-      description: Request rejected. Returns the documented error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth1a:
       type: http
