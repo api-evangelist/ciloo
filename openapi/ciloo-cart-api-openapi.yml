@@ -196,6 +196,23 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    CartResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        cart_items:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/CartItem'
+        meta:
+          type: object
+          properties:
+            total_items:
+              type: integer
+            last_updated:
+              type: string
+              format: date-time
     CartItem:
       type: object
       description: One item in a Ciloo brand-store cart, keyed in responses by its asset_id.
@@ -245,23 +262,6 @@ components:
               type: string
             method:
               type: string
-    CartResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        cart_items:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/CartItem'
-        meta:
-          type: object
-          properties:
-            total_items:
-              type: integer
-            last_updated:
-              type: string
-              format: date-time
     SuccessResponse:
       type: object
       properties:
