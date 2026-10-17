@@ -98,6 +98,32 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Request rejected. Returns the documented error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            documented:
+              value:
+                success: false
+                error:
+                  code: OAUTH_SIGNATURE_INVALID
+                  message: OAuth signature validation failed
+                  details: The provided signature does not match the expected signature
+                  timestamp: '2025-08-16T10:30:00Z'
+                debug:
+                  request_id: req_1692096000_abc123
+                  endpoint: /wp-json/ciloo/v1/cart/add-item
+                  method: POST
   schemas:
     Customer:
       allOf:
@@ -107,24 +133,31 @@ components:
             type: integer
             description: Customer id, used to generate customer OAuth keys.
       - $ref: '#/components/schemas/CustomerInput'
-    CustomerInput:
+    Address:
       type: object
       properties:
-        email:
-          type: string
-          format: email
         first_name:
           type: string
         last_name:
           type: string
-        username:
+        company:
           type: string
-        password:
+        address_1:
           type: string
-        billing:
-          $ref: '#/components/schemas/Address'
-        shipping:
-          $ref: '#/components/schemas/Address'
+        address_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
     ErrorResponse:
       type: object
       description: The documented Ciloo error envelope. Note this is a bespoke envelope, not RFC 9457 problem+json.
@@ -152,57 +185,24 @@ components:
               type: string
             method:
               type: string
-    Address:
+    CustomerInput:
       type: object
       properties:
+        email:
+          type: string
+          format: email
         first_name:
           type: string
         last_name:
           type: string
-        company:
+        username:
           type: string
-        address_1:
+        password:
           type: string
-        address_2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postcode:
-          type: string
-        country:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-  responses:
-    BadRequest:
-      description: Request rejected. Returns the documented error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            documented:
-              value:
-                success: false
-                error:
-                  code: OAUTH_SIGNATURE_INVALID
-                  message: OAuth signature validation failed
-                  details: The provided signature does not match the expected signature
-                  timestamp: '2025-08-16T10:30:00Z'
-                debug:
-                  request_id: req_1692096000_abc123
-                  endpoint: /wp-json/ciloo/v1/cart/add-item
-                  method: POST
+        billing:
+          $ref: '#/components/schemas/Address'
+        shipping:
+          $ref: '#/components/schemas/Address'
   securitySchemes:
     oauth1a:
       type: http

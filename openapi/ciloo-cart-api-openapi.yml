@@ -195,46 +195,33 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Request rejected. Returns the documented error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            documented:
+              value:
+                success: false
+                error:
+                  code: OAUTH_SIGNATURE_INVALID
+                  message: OAuth signature validation failed
+                  details: The provided signature does not match the expected signature
+                  timestamp: '2025-08-16T10:30:00Z'
+                debug:
+                  request_id: req_1692096000_abc123
+                  endpoint: /wp-json/ciloo/v1/cart/add-item
+                  method: POST
   schemas:
-    CartResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        cart_items:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/CartItem'
-        meta:
-          type: object
-          properties:
-            total_items:
-              type: integer
-            last_updated:
-              type: string
-              format: date-time
-    CartItem:
-      type: object
-      description: One item in a Ciloo brand-store cart, keyed in responses by its asset_id.
-      properties:
-        quantity:
-          type: integer
-        filename:
-          type: string
-        productUid:
-          type: string
-        pages:
-          type: integer
-        url:
-          type: string
-          format: uri
-        item_sku:
-          type: string
-        product_id:
-          type: integer
-        added_at:
-          type: string
-          format: date-time
     ErrorResponse:
       type: object
       description: The documented Ciloo error envelope. Note this is a bespoke envelope, not RFC 9457 problem+json.
@@ -262,6 +249,45 @@ components:
               type: string
             method:
               type: string
+    CartItem:
+      type: object
+      description: One item in a Ciloo brand-store cart, keyed in responses by its asset_id.
+      properties:
+        quantity:
+          type: integer
+        filename:
+          type: string
+        productUid:
+          type: string
+        pages:
+          type: integer
+        url:
+          type: string
+          format: uri
+        item_sku:
+          type: string
+        product_id:
+          type: integer
+        added_at:
+          type: string
+          format: date-time
+    CartResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        cart_items:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/CartItem'
+        meta:
+          type: object
+          properties:
+            total_items:
+              type: integer
+            last_updated:
+              type: string
+              format: date-time
     SuccessResponse:
       type: object
       properties:
@@ -269,32 +295,6 @@ components:
           type: boolean
         data:
           type: object
-  responses:
-    BadRequest:
-      description: Request rejected. Returns the documented error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. The provider documents OAUTH_SIGNATURE_INVALID as by far the most common error (about 80% of reported integration problems).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            documented:
-              value:
-                success: false
-                error:
-                  code: OAUTH_SIGNATURE_INVALID
-                  message: OAuth signature validation failed
-                  details: The provided signature does not match the expected signature
-                  timestamp: '2025-08-16T10:30:00Z'
-                debug:
-                  request_id: req_1692096000_abc123
-                  endpoint: /wp-json/ciloo/v1/cart/add-item
-                  method: POST
   securitySchemes:
     oauth1a:
       type: http
