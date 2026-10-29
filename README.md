@@ -64,24 +64,130 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Ciloo is a Rotterdam-headquartered global platform for branded products and promotional merchandise.
-Enterprises run a branded Ciloo store, and every order placed in it is produced on demand by a
-production partner near the recipient.
+Ciloo is a Rotterdam-headquartered global platform for branded products and promotional merchandise. Enterprises run a branded Ciloo store — business cards, apparel, stationery, signage, corporate gifts and sales collateral — and every order placed in it is produced on demand by a vetted production partner near the recipient, which Ciloo positions as cutting cost, waste and shipping distance while keeping brand control central. The platform is used by manufacturing, medical-device, professional- services and franchise organisations, and integrates with digital asset management (Frontify, Bynder, Canto, Aprimo, Papirfly, Brandfolder, Marvia), procurement and ERP (SAP Ariba, S/4HANA, Proactis, Proqura, Exact), SSO, and WooCommerce. Ciloo documents two APIs on its own knowledge centre at api.cilooprint.com: a per-brand-store Cart API secured with OAuth 1.0a, and a bidirectional Printer API integration that pushes orders to production partners and receives production and shipping status callbacks in return.
 
-Ciloo documents two APIs on its own knowledge centre at
-[api.cilooprint.com](https://api.cilooprint.com/):
+**Areas:** Company · Printing · Branded Merchandise · Promotional Products · Print on Demand · E-Commerce · Digital Asset Management · Procurement · Fulfillment · Marketing
 
-- **[Ciloo Cart API](https://api.cilooprint.com/ciloo-cart-api-documentation/)** — OAuth 1.0a
-  (HMAC-SHA1) REST API on the `ciloo/v1` namespace of a brand store: cart read/write, per-customer key
-  provisioning, and one-hour auto-login tokens. A first-party Postman collection is published for
-  download; there is no provider OpenAPI, so the description in `openapi/` was generated from the
-  reference and that collection.
-- **[Ciloo Printer API Integration](https://api.cilooprint.com/printer-api-integration/)** —
-  bidirectional order and status callbacks between Ciloo and its production partners, captured as a
-  webhook catalog in `asyncapi/`.
+## Ciloo on APIs.io
 
-Note that there is no single shared API host: each brand store is its own hostname
-(`<tenant>.cilooprint.com` or a customer-owned domain) and the API is served from `/wp-json` on it.
+Everything profiled for Ciloo is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ciloo/](https://apis.io/providers/ciloo/)** — or go straight to one of the APIs or properties below.
 
-- https://ciloo.com/
-- https://api.cilooprint.com/
+### APIs (4)
+
+- [Ciloo Cart API](https://apis.io/apis/ciloo/ciloo-cart-api/) — OAuth 1.0a (HMAC-SHA1) REST API on the ciloo/v1 namespace of a Ciloo brand store. Read, add, update and remove cart items; mint per-customer OAuth…
+- [Ciloo Printer API Integration](https://apis.io/apis/ciloo/ciloo-printer-api/) — Bidirectional order integration between Ciloo and its production partners. Ciloo POSTs a print order — items, print components with artwork paths and…
+- [Ciloo Authentication API](https://apis.io/apis/ciloo/ciloo-authentication-api/) — OAuth key provisioning and auto-login token issuance.
+- [Ciloo Customers API](https://apis.io/apis/ciloo/ciloo-customers-api/) — Customer lifecycle via the WooCommerce REST API v3 namespace, as documented by Ciloo.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Ciloo Printer Webhooks](https://apis.io/asyncapis/ciloo/ciloo-printer-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [ciloo](https://apis.io/servers/ciloo/ciloo/)
+
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [Ciloo Cart API](https://apis.io/collections/ciloo/open-ciloo-cart-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Ciloo Cart Api Overlay](https://apis.io/overlays/ciloo/ciloo-cart-api-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ciloo Authentication](https://apis.io/security/ciloo/ciloo-authentication/)
+- [Ciloo Domain Security](https://apis.io/security/ciloo/ciloo-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ciloo Plans Pricing](https://apis.io/plans/ciloo/ciloo-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ciloo Rate Limits](https://apis.io/rate-limits/ciloo/ciloo-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://ciloo.com/)
+- [Documentation](https://api.cilooprint.com/)
+- [Getting started](https://api.cilooprint.com/ciloo-cart-api-documentation/#authentication-setup)
+- [API reference](https://api.cilooprint.com/ciloo-cart-api-documentation/#api-endpoints-reference)
+- [Support](https://support.ciloo.com/hc/en-us)
+- [Blog](https://ciloo.com/blog/)
+- [Terms of service](https://ciloo.com/terms-conditions/)
+- [Privacy policy](https://ciloo.com/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 30.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 21.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 55.4 |
+| Access clarity | 21.1 |
+
+**Agent readiness 29.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ciloo/](https://apis.io/providers/ciloo/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Ciloo: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ciloo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
